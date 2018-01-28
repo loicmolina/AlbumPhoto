@@ -1,0 +1,10 @@
+C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.csprojResolveAssemblyReference.cache
+C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\ProjetAlbum.Form1.resources
+C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.Properties.Resources.resources
+C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.csproj.GenerateResource.Cache
+C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.csproj.CoreCompileInputs.cache
+C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.exe.config
+C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.exe
+C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.pdb
+C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.exe
+C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.pdb
