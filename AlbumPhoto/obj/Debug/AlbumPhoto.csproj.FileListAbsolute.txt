@@ -8,3 +8,14 @@ C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.ex
 C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.pdb
 C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.exe
 C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.pdb
+D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.exe.config
+D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.exe
+D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.pdb
+D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.csprojResolveAssemblyReference.cache
+D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\obj\Debug\ProjetAlbum.Form1.resources
+D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.Properties.Resources.resources
+D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.csproj.GenerateResource.Cache
+D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.csproj.CoreCompileInputs.cache
+D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.exe
+D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.pdb
+D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.testaffF1.resources

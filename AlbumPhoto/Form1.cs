@@ -9,15 +9,13 @@ namespace ProjetAlbum
     {
         protected OpenFileDialog openFileDialog;
         protected FolderBrowserDialog folderBrowserDialog;
-        protected Image img;
+        protected string current_folder;
 
         public Form1()
         {
             InitializeComponent();
             openFileDialog = new OpenFileDialog();
             folderBrowserDialog = new FolderBrowserDialog();
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -25,11 +23,7 @@ namespace ProjetAlbum
 
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-
-                img = Image.FromFile(openFileDialog.FileName);
-                Bitmap btm = new Bitmap(img, new Size(400, 400));
-                
-                pictureBox1.Image = btm;
+                pictureBox1.Image = Image.FromFile(openFileDialog.FileName);
 
             }
 
@@ -39,8 +33,8 @@ namespace ProjetAlbum
         {
             if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string strng = folderBrowserDialog.SelectedPath;
-                DirectoryInfo dinfo = new DirectoryInfo(strng);
+                current_folder = folderBrowserDialog.SelectedPath;
+                DirectoryInfo dinfo = new DirectoryInfo(current_folder);
                 FileInfo[] files = dinfo.GetFiles();
                 foreach (FileInfo file in files)
                 {
@@ -49,23 +43,13 @@ namespace ProjetAlbum
             }
         }
 
-        private void listBox1_MouseDown(object sender, MouseEventArgs e)
+        private void button_display_img_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count == 0)
+            if (listBox1.Items.Count <= 0 || listBox1.SelectedIndex < 0)
             {
                 return;
             }
-
-            int index = listBox1.IndexFromPoint(e.X, e.Y);
-            string s = listBox1.Items[index].ToString();
-            DragDropEffects dde1 = DoDragDrop(s, DragDropEffects.All);
+            pictureBox1.Image = Image.FromFile(current_folder+"\\"+listBox1.SelectedItem.ToString());
         }
-
-        private void listBox1_DragLeave(object sender, EventArgs e)
-        {
-            ListBox lb = sender as ListBox;
-            lb.Items.Remove(lb.SelectedItem);
-        }
-        
     }
 }

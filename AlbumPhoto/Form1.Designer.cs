@@ -32,6 +32,7 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button_import_album = new System.Windows.Forms.Button();
+            this.button_display_img = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,14 +51,14 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(3, 63);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(135, 342);
+            this.listBox1.Size = new System.Drawing.Size(135, 316);
             this.listBox1.TabIndex = 2;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(144, 5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(400, 400);
+            this.pictureBox1.Size = new System.Drawing.Size(835, 400);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
@@ -72,11 +73,23 @@
             this.button_import_album.UseVisualStyleBackColor = true;
             this.button_import_album.Click += new System.EventHandler(this.button_import_album_Click);
             // 
+            // button_display_img
+            // 
+            this.button_display_img.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_display_img.Location = new System.Drawing.Point(3, 382);
+            this.button_display_img.Name = "button_display_img";
+            this.button_display_img.Size = new System.Drawing.Size(135, 23);
+            this.button_display_img.TabIndex = 5;
+            this.button_display_img.Text = "Afficher l\'image";
+            this.button_display_img.UseVisualStyleBackColor = true;
+            this.button_display_img.Click += new System.EventHandler(this.button_display_img_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 412);
+            this.ClientSize = new System.Drawing.Size(984, 412);
+            this.Controls.Add(this.button_display_img);
             this.Controls.Add(this.button_import_album);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.listBox1);
@@ -94,6 +107,7 @@
         private System.Windows.Forms.Button button_import_album;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button_display_img;
     }
 }
 
