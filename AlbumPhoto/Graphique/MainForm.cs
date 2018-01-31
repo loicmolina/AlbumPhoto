@@ -1,46 +1,43 @@
-﻿using System;
+﻿using AlbumPhoto;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
 namespace ProjetAlbum
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         protected OpenFileDialog openFileDialog;
         protected FolderBrowserDialog folderBrowserDialog;
+        protected PreferenceForm pf;
+        protected Donnees donnees;
+       
         protected string current_folder;
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             openFileDialog = new OpenFileDialog();
             folderBrowserDialog = new FolderBrowserDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public MainForm(Donnees dnn)
+        {
+            donnees = dnn;
+            InitializeComponent();
+            openFileDialog = new OpenFileDialog();
+            folderBrowserDialog = new FolderBrowserDialog();
+        }
+
+        private void button_import_image_Click(object sender, EventArgs e)
         {
 
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 pictureBox1.Image = Image.FromFile(openFileDialog.FileName);
-
             }
 
-        }
-
-        private void button_import_album_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                current_folder = folderBrowserDialog.SelectedPath;
-                DirectoryInfo dinfo = new DirectoryInfo(current_folder);
-                FileInfo[] files = dinfo.GetFiles();
-                foreach (FileInfo file in files)
-                {
-                    listBox1.Items.Add(file.Name);
-                }
-            }
         }
 
         private void button_display_img_Click(object sender, EventArgs e)
@@ -50,6 +47,20 @@ namespace ProjetAlbum
                 return;
             }
             pictureBox1.Image = Image.FromFile(current_folder+"\\"+listBox1.SelectedItem.ToString());
+        }
+
+        private void quitterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void localisationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (pf == null)
+            {
+                pf = new PreferenceForm(donnees);
+            }            
+            pf.Show();
         }
     }
 }

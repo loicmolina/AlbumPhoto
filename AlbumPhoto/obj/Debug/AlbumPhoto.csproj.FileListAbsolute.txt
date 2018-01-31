@@ -19,3 +19,14 @@ D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.csproj.CoreComp
 D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.exe
 D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.pdb
 D:\Projets\AlbumPhoto\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.testaffF1.resources
+D:\Projets\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.exe.config
+D:\Projets\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.exe
+D:\Projets\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.pdb
+D:\Projets\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.csprojResolveAssemblyReference.cache
+D:\Projets\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.Properties.Resources.resources
+D:\Projets\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.csproj.GenerateResource.Cache
+D:\Projets\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.csproj.CoreCompileInputs.cache
+D:\Projets\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.exe
+D:\Projets\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.pdb
+D:\Projets\AlbumPhoto\AlbumPhoto\obj\Debug\ProjetAlbum.MainForm.resources
+D:\Projets\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.PreferenceForm.resources
