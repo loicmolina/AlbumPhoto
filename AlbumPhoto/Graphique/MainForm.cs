@@ -32,11 +32,29 @@ namespace ProjetAlbum
 
         private void button_import_image_Click(object sender, EventArgs e)
         {
-
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string strng = folderBrowserDialog.SelectedPath;
+                DirectoryInfo dinfo = new DirectoryInfo(strng);
+                FileInfo[] files = dinfo.GetFiles();
+                foreach (FileInfo file in files)
+                {
+                    if (file.Name.Contains(".png"))
+                    {
+                        imageList1.Images.Add(Image.FromFile(strng + "\\" + file.Name));
+                        string s = imageList1.Images.Keys[0].ToString();
+                        ListViewItem lstItem = new ListViewItem();
+                        lstItem.ImageIndex = 0;
+                        lstItem.Text = s;
+                        listView1.Items.Add(lstItem);
+                    }
+                        
+                }
+            }
+            /*if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 pictureBox1.Image = Image.FromFile(openFileDialog.FileName);
-            }
+            }*/
 
         }
 
@@ -46,7 +64,7 @@ namespace ProjetAlbum
             {
                 return;
             }
-            pictureBox1.Image = Image.FromFile(current_folder+"\\"+listBox1.SelectedItem.ToString());
+            //pictureBox1.Image = Image.FromFile(current_folder+"\\"+listBox1.SelectedItem.ToString());
         }
 
         private void quitterToolStripMenuItem_Click(object sender, EventArgs e)
