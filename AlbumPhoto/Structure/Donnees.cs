@@ -1,18 +1,19 @@
-﻿using System;
+﻿using AlbumPhoto.Obs;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AlbumPhoto
 {
     public class Donnees
     {
+        public List<Observer> listeObservers;
         protected List<Album> listeAlbums;
-        protected string path_folder;
+        protected String path_folder;
 
         public Donnees()
         {
+            listeObservers = new List<Observer>();
             listeAlbums = new List<Album>();
             path_folder = "";
         }
@@ -27,6 +28,11 @@ namespace AlbumPhoto
             path_folder = s;
         }
 
+        public void addObserver(Observer obs)
+        {
+            listeObservers.Add(obs);
+        }
+
         public void addAlbum(Album album)
         {
             listeAlbums.Add(album);
@@ -36,5 +42,14 @@ namespace AlbumPhoto
         {
             return listeAlbums[index];
         }
+
+        public void notifyObservers()
+        {
+            foreach (Observer o in listeObservers)
+            {
+                o.updateField();
+            }
+        }
+        
     }
 }

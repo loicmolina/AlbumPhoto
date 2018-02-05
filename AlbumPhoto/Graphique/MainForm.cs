@@ -1,4 +1,5 @@
 ﻿using AlbumPhoto;
+using AlbumPhoto.Obs;
 using System;
 using System.Drawing;
 using System.IO;
@@ -6,7 +7,7 @@ using System.Windows.Forms;
 
 namespace ProjetAlbum
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form, Observer
     {
         protected OpenFileDialog openFileDialog;
         protected FolderBrowserDialog folderBrowserDialog;
@@ -24,8 +25,14 @@ namespace ProjetAlbum
 
         public MainForm(Donnees dnn)
         {
+            //association au modèle
             donnees = dnn;
+            donnees.addObserver(this);
+
+            //Initialisation des composants
             InitializeComponent();
+
+            //Declaration des File et Browser Dialogs
             openFileDialog = new OpenFileDialog();
             folderBrowserDialog = new FolderBrowserDialog();
         }
@@ -79,6 +86,25 @@ namespace ProjetAlbum
                 pf = new PreferenceForm(donnees);
             }            
             pf.Show();
+        }
+
+        public void updateField()
+        {
+            string[] folders = System.IO.Directory.GetDirectories(donnees.getPath(), "*", System.IO.SearchOption.TopDirectoryOnly).;
+            foreach (string folder in folders)
+            {
+                listBox1.Items.Add(folder);
+            }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DirectoryInfo dinfo = new DirectoryInfo(donnees.getPath()+"/"+listBox1.SelectedItem.ToString());
+            FileInfo[] Files = dinfo.GetFiles();
+            foreach (FileInfo file in Files)
+            {
+                imageList1.Images.Add(Image.FromFile(donnees.getPath()+"/"+file.ToString()));
+            }
         }
     }
 }

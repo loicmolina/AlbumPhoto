@@ -43,6 +43,7 @@ namespace AlbumPhoto
             if (!textBox_folder_path.Text.Equals(""))
             {
                 this.Hide();
+                donnees.notifyObservers();
             }
         }
 
