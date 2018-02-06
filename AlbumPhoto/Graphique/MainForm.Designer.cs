@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.button_import_image = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button_display_img = new System.Windows.Forms.Button();
@@ -39,35 +37,38 @@
             this.localisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.listePhotos = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button_import_image
             // 
-            this.button_import_image.Location = new System.Drawing.Point(3, 35);
+            this.button_import_image.Location = new System.Drawing.Point(4, 43);
+            this.button_import_image.Margin = new System.Windows.Forms.Padding(4);
             this.button_import_image.Name = "button_import_image";
-            this.button_import_image.Size = new System.Drawing.Size(135, 28);
+            this.button_import_image.Size = new System.Drawing.Size(180, 34);
             this.button_import_image.TabIndex = 0;
             this.button_import_image.Text = "Importer une image";
             this.button_import_image.UseVisualStyleBackColor = true;
-            this.button_import_image.Click += new System.EventHandler(this.button_import_image_Click);
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(3, 66);
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(4, 81);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(135, 316);
+            this.listBox1.Size = new System.Drawing.Size(179, 388);
             this.listBox1.TabIndex = 2;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // button_display_img
             // 
             this.button_display_img.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button_display_img.Location = new System.Drawing.Point(3, 385);
+            this.button_display_img.Location = new System.Drawing.Point(4, 474);
+            this.button_display_img.Margin = new System.Windows.Forms.Padding(4);
             this.button_display_img.Name = "button_display_img";
-            this.button_display_img.Size = new System.Drawing.Size(135, 20);
+            this.button_display_img.Size = new System.Drawing.Size(180, 25);
             this.button_display_img.TabIndex = 5;
             this.button_display_img.Text = "Afficher l\'image";
             this.button_display_img.UseVisualStyleBackColor = true;
@@ -75,11 +76,13 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fichierToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(984, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1472, 28);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -89,53 +92,52 @@
             this.localisationToolStripMenuItem,
             this.quitterToolStripMenuItem});
             this.fichierToolStripMenuItem.Name = "fichierToolStripMenuItem";
-            this.fichierToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.fichierToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.fichierToolStripMenuItem.Text = "Fichier";
             // 
             // localisationToolStripMenuItem
             // 
             this.localisationToolStripMenuItem.Name = "localisationToolStripMenuItem";
-            this.localisationToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.localisationToolStripMenuItem.Size = new System.Drawing.Size(163, 26);
             this.localisationToolStripMenuItem.Text = "Localisation";
             this.localisationToolStripMenuItem.Click += new System.EventHandler(this.localisationToolStripMenuItem_Click);
             // 
             // quitterToolStripMenuItem
             // 
             this.quitterToolStripMenuItem.Name = "quitterToolStripMenuItem";
-            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(163, 26);
             this.quitterToolStripMenuItem.Text = "Quitter";
             this.quitterToolStripMenuItem.Click += new System.EventHandler(this.quitterToolStripMenuItem_Click);
             // 
             // listView1
             // 
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(144, 35);
+            this.listView1.LargeImageList = this.listePhotos;
+            this.listView1.Location = new System.Drawing.Point(192, 43);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(828, 370);
+            this.listView1.Size = new System.Drawing.Size(1103, 454);
+            this.listView1.SmallImageList = this.listePhotos;
             this.listView1.TabIndex = 7;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
-            // imageList1
+            // listePhotos
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "");
-            this.imageList1.Images.SetKeyName(1, "");
-            this.imageList1.Images.SetKeyName(2, "");
+            this.listePhotos.ColorDepth = System.Windows.Forms.ColorDepth.Depth16Bit;
+            this.listePhotos.ImageSize = new System.Drawing.Size(200, 200);
+            this.listePhotos.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 412);
+            this.ClientSize = new System.Drawing.Size(1472, 507);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.button_display_img);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button_import_image);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
@@ -155,7 +157,7 @@
         private System.Windows.Forms.ToolStripMenuItem quitterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem localisationToolStripMenuItem;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ImageList listePhotos;
     }
 }
 

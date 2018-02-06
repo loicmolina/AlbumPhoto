@@ -21,6 +21,8 @@ namespace ProjetAlbum
             InitializeComponent();
             openFileDialog = new OpenFileDialog();
             folderBrowserDialog = new FolderBrowserDialog();
+            listView1.View = View.LargeIcon;
+            listView1.LargeImageList = listePhotos;
         }
 
         public MainForm(Donnees dnn)
@@ -31,38 +33,12 @@ namespace ProjetAlbum
 
             //Initialisation des composants
             InitializeComponent();
+            listView1.View = View.LargeIcon;
+            listView1.LargeImageList = listePhotos;
 
             //Declaration des File et Browser Dialogs
             openFileDialog = new OpenFileDialog();
             folderBrowserDialog = new FolderBrowserDialog();
-        }
-
-        private void button_import_image_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                string strng = folderBrowserDialog.SelectedPath;
-                DirectoryInfo dinfo = new DirectoryInfo(strng);
-                FileInfo[] files = dinfo.GetFiles();
-                foreach (FileInfo file in files)
-                {
-                    if (file.Name.Contains(".png"))
-                    {
-                        imageList1.Images.Add(Image.FromFile(strng + "\\" + file.Name));
-                        string s = imageList1.Images.Keys[0].ToString();
-                        ListViewItem lstItem = new ListViewItem();
-                        lstItem.ImageIndex = 0;
-                        lstItem.Text = s;
-                        listView1.Items.Add(lstItem);
-                    }
-                        
-                }
-            }
-            /*if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                pictureBox1.Image = Image.FromFile(openFileDialog.FileName);
-            }*/
-
         }
 
         private void button_display_img_Click(object sender, EventArgs e)
@@ -90,21 +66,60 @@ namespace ProjetAlbum
 
         public void updateField()
         {
-            string[] folders = System.IO.Directory.GetDirectories(donnees.getPath(), "*", System.IO.SearchOption.TopDirectoryOnly).;
+            string[] folders = System.IO.Directory.GetDirectories(donnees.getPath(), "*", System.IO.SearchOption.TopDirectoryOnly);
+            listBox1.Items.Clear();
             foreach (string folder in folders)
             {
-                listBox1.Items.Add(folder);
+                listBox1.Items.Add(folderName(folder));
             }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DirectoryInfo dinfo = new DirectoryInfo(donnees.getPath()+"/"+listBox1.SelectedItem.ToString());
+            DirectoryInfo dinfo = new DirectoryInfo(donnees.getPath()+"\\"+listBox1.SelectedItem.ToString());
             FileInfo[] Files = dinfo.GetFiles();
+
+            //vide les listes
+            disposeAll();
+
             foreach (FileInfo file in Files)
             {
-                imageList1.Images.Add(Image.FromFile(donnees.getPath()+"/"+file.ToString()));
+                try
+                {
+                    listePhotos.Images.Add(Image.FromFile(donnees.getPath() + "\\" + listBox1.SelectedItem.ToString() + "\\" + file.ToString()));
+                }
+                catch { Console.WriteLine("Image introuvable"); }
+                   
             }
+
+
+            for (int j = 0; j < listePhotos.Images.Count; j++)
+            {
+                ListViewItem item = new ListViewItem();
+                item.ImageIndex = j;
+                listView1.Items.Add(item);
+            }
+        }
+
+        public string folderName(string absolutePath)
+        {
+            int i = absolutePath.Length-1;
+            while (!absolutePath[i].Equals('\\'))
+            {
+                i--;
+            }
+            i++;
+            return absolutePath.Substring(i, absolutePath.Length - i);
+        }
+
+        public void disposeAll()
+        {
+            foreach (Image img in listePhotos.Images)
+            {
+                img.Dispose();
+            }
+            listePhotos.Images.Clear();
+            listView1.Items.Clear();
         }
     }
 }
