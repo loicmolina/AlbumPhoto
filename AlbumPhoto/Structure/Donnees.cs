@@ -1,6 +1,7 @@
 ﻿using AlbumPhoto.Obs;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace AlbumPhoto
@@ -9,24 +10,20 @@ namespace AlbumPhoto
     {
         public List<Observer> listeObservers;
         protected List<Album> listeAlbums;
-        protected String path_folder;
+        public String path_folder { get; set; }
+        public String current_album { get; set; }
 
         public Donnees()
         {
             listeObservers = new List<Observer>();
             listeAlbums = new List<Album>();
             path_folder = "";
+            current_album = "";
         }
 
-        public string getPath()
-        {
-            return path_folder;
-        }
+        public bool path_folder_isEmpty() { return path_folder.Equals("") || path_folder.Equals(null); }
 
-        public void setPath(string s)
-        {
-            path_folder = s;
-        }
+        public bool current_album_isEmpty() { return current_album.Equals("") || current_album.Equals(null);  }
 
         public void addObserver(Observer obs)
         {
@@ -36,6 +33,11 @@ namespace AlbumPhoto
         public void addAlbum(Album album)
         {
             listeAlbums.Add(album);
+        }
+
+        public void createAlbum(String path, String name)
+        {
+            Directory.CreateDirectory(path+"\\"+name);
         }
 
         public Album getAlbum(int index)

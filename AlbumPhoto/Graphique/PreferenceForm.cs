@@ -33,8 +33,8 @@ namespace AlbumPhoto
         {
             if (folderBrowserDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                donnees.setPath(folderBrowserDialog.SelectedPath);
-                textBox_folder_path.Text = donnees.getPath();
+                donnees.path_folder=folderBrowserDialog.SelectedPath;
+                textBox_folder_path.Text = donnees.path_folder;
             }
         }
 

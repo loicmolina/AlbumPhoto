@@ -18,11 +18,14 @@ namespace ProjetAlbum
 
         public MainForm()
         {
+            //Initialisation des composants
             InitializeComponent();
-            openFileDialog = new OpenFileDialog();
-            folderBrowserDialog = new FolderBrowserDialog();
             listView1.View = View.LargeIcon;
             listView1.LargeImageList = listePhotos;
+
+            //Instanciatons des File et Browser Dialogs
+            openFileDialog = new OpenFileDialog();
+            folderBrowserDialog = new FolderBrowserDialog();            
         }
 
         public MainForm(Donnees dnn)
@@ -36,18 +39,17 @@ namespace ProjetAlbum
             listView1.View = View.LargeIcon;
             listView1.LargeImageList = listePhotos;
 
-            //Declaration des File et Browser Dialogs
+            //Instanciatons des File et Browser Dialogs
             openFileDialog = new OpenFileDialog();
             folderBrowserDialog = new FolderBrowserDialog();
         }
 
-        private void button_display_img_Click(object sender, EventArgs e)
+        private void button_AddAlbum(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count <= 0 || listBox1.SelectedIndex < 0)
-            {
+            if (donnees.path_folder_isEmpty())
                 return;
-            }
-            //pictureBox1.Image = Image.FromFile(current_folder+"\\"+listBox1.SelectedItem.ToString());
+            donnees.createAlbum(donnees.path_folder, this.nameNewAlbum.Text);
+            updateField();
         }
 
         private void quitterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -66,18 +68,21 @@ namespace ProjetAlbum
 
         public void updateField()
         {
-            string[] folders = System.IO.Directory.GetDirectories(donnees.getPath(), "*", System.IO.SearchOption.TopDirectoryOnly);
-            listBox1.Items.Clear();
-            foreach (string folder in folders)
+            if (donnees.path_folder_isEmpty())
+                return;
+            string[] folders = System.IO.Directory.GetDirectories(donnees.path_folder, "*", System.IO.SearchOption.TopDirectoryOnly);
+            listAlbums.Items.Clear();
+            foreach (string folderpath in folders)
             {
-                listBox1.Items.Add(folderName(folder));
+                listAlbums.Items.Add(getName(folderpath));
             }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DirectoryInfo dinfo = new DirectoryInfo(donnees.getPath()+"\\"+listBox1.SelectedItem.ToString());
+            DirectoryInfo dinfo = new DirectoryInfo(donnees.path_folder + "\\"+listAlbums.SelectedItem.ToString());
             FileInfo[] Files = dinfo.GetFiles();
+            donnees.current_album = listAlbums.SelectedItem.ToString();
 
             //vide les listes
             disposeAll();
@@ -85,14 +90,20 @@ namespace ProjetAlbum
             foreach (FileInfo file in Files)
             {
                 try
-                {
-                    listePhotos.Images.Add(Image.FromFile(donnees.getPath() + "\\" + listBox1.SelectedItem.ToString() + "\\" + file.ToString()));
+                {                    
+                    listePhotos.Images.Add(Image.FromFile(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + file.ToString()));
                 }
                 catch { Console.WriteLine("Image introuvable"); }
                    
             }
 
+            redrawListPhotos();
+            
+        }
 
+        public void redrawListPhotos()
+        {
+            listView1.Clear();
             for (int j = 0; j < listePhotos.Images.Count; j++)
             {
                 ListViewItem item = new ListViewItem();
@@ -101,10 +112,10 @@ namespace ProjetAlbum
             }
         }
 
-        public string folderName(string absolutePath)
+        public string getName(string absolutePath)
         {
             int i = absolutePath.Length-1;
-            while (!absolutePath[i].Equals('\\'))
+            while (!absolutePath[i].Equals('\\') || i==0)
             {
                 i--;
             }
@@ -120,6 +131,27 @@ namespace ProjetAlbum
             }
             listePhotos.Images.Clear();
             listView1.Items.Clear();
+        }
+
+        private void buttonAddPhoto_Click(object sender, EventArgs e)
+        {
+            if ( donnees.current_album_isEmpty() || donnees.path_folder_isEmpty() )
+                { return; }
+
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                System.IO.File.Copy(openFileDialog.FileName, donnees.path_folder + "\\" + donnees.current_album + "\\" + getName(openFileDialog.FileName));
+                listePhotos.Images.Add(Image.FromFile(donnees.path_folder + "\\" + donnees.current_album + "\\" + getName(openFileDialog.FileName)));
+                redrawListPhotos();
+            }
+        }
+
+        private void buttonImportAlbum_Click(object sender, EventArgs e)
+        {
+            if (donnees.path_folder_isEmpty())
+            { return; }
+
+
         }
     }
 }
