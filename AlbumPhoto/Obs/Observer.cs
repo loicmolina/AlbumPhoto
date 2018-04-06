@@ -8,6 +8,6 @@ namespace AlbumPhoto.Obs
 {
     public interface Observer
     {
-        void updateField();
+        void UpdateAlbumsField();
     }
 }

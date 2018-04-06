@@ -41,3 +41,4 @@ D:\Users\Remi\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.pdb
 D:\Users\Remi\source\repos\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.exe.config
 D:\Users\Remi\source\repos\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.exe
 D:\Users\Remi\source\repos\AlbumPhoto\AlbumPhoto\bin\Debug\AlbumPhoto.pdb
+D:\Projets\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.Graphique.DetailPhotoForm.resources

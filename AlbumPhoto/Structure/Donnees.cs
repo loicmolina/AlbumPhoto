@@ -1,4 +1,5 @@
 ﻿using AlbumPhoto.Obs;
+using AlbumPhoto.Outils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,50 +9,105 @@ namespace AlbumPhoto
 {
     public class Donnees
     {
-        public List<Observer> listeObservers;
-        protected List<Album> listeAlbums;
+        protected List<Observer> listeObservers;
+        public List<Album> listeAlbums { get; }
+        public List<string> listeLocalisations { get; }
         public String path_folder { get; set; }
-        public String current_album { get; set; }
+        public Album current_album { get; set; }
 
+
+
+        //Constucteur
         public Donnees()
         {
             listeObservers = new List<Observer>();
             listeAlbums = new List<Album>();
+            listeLocalisations = new List<string>();
             path_folder = "";
-            current_album = "";
         }
 
-        public bool path_folder_isEmpty() { return path_folder.Equals("") || path_folder.Equals(null); }
 
-        public bool current_album_isEmpty() { return current_album.Equals("") || current_album.Equals(null);  }
 
-        public void addObserver(Observer obs)
+        //booléen permettant de vérifier les chemins définis
+        public bool PathFolderIsEmpty() { return path_folder.Equals("") || path_folder == null; }
+
+        public bool CurrentAlbumIsEmpty() { return current_album.Equals("") || current_album == null;  }
+        
+
+
+        //Gestion d'Observer/Observable
+
+        public void AddObserver(Observer obs)
         {
             listeObservers.Add(obs);
         }
 
-        public void addAlbum(Album album)
+        public void NotifyObservers()
+        {
+            foreach (Observer o in listeObservers)
+            {
+                o.UpdateAlbumsField();
+            }
+        }
+        
+
+        //Méthodes de gestion des albums
+
+        public void AddAlbum(Album album)
         {
             listeAlbums.Add(album);
         }
 
-        public void createAlbum(String path, String name)
+        public Album GetAlbum(string nom)
         {
-            Directory.CreateDirectory(path+"\\"+name);
-        }
-
-        public Album getAlbum(int index)
-        {
-            return listeAlbums[index];
-        }
-
-        public void notifyObservers()
-        {
-            foreach (Observer o in listeObservers)
+            int i = 0;
+            while(!listeAlbums[i].Equals(new Album(nom)))
             {
-                o.updateField();
+                i++;
+            }
+            return listeAlbums[i];
+        }
+
+        public void CreateAlbum(String name)
+        {
+            Directory.CreateDirectory(path_folder+ "\\"+name);
+            listeAlbums.Add(new Album(name));
+        }
+
+        public void DeleteAlbum(String name)
+        {
+            Directory.Delete(path_folder + "\\" + name, true);
+
+            int i = 0;        
+            while (!listeAlbums[i].Equals(name))  { i++; }
+
+            listeAlbums.RemoveAt(i);
+        }
+
+        public void UpdateAlbums(string[] folders)
+        {
+            if (!listeLocalisations.Contains(path_folder))
+            {
+                listeLocalisations.Add(path_folder);
+                foreach (string folder in folders)
+                {
+                    listeAlbums.Add(new Album(GestionDossiers.Instance.getName(folder)));
+                }
             }
         }
-        
+
+
+        //Méthodes gestions photos
+
+        public void UpdatePhotos(FileInfo[] Files)
+        {
+            if (!listeLocalisations.Contains(path_folder))
+            {
+                foreach (FileInfo file in Files)
+                {
+                    current_album.addPhoto(file.ToString());
+                }
+            }
+        }
     }
 }

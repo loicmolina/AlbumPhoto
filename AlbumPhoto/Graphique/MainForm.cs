@@ -1,5 +1,6 @@
 ﻿using AlbumPhoto;
 using AlbumPhoto.Obs;
+using AlbumPhoto.Outils;
 using System;
 using System.Drawing;
 using System.IO;
@@ -12,16 +13,16 @@ namespace ProjetAlbum
         protected OpenFileDialog openFileDialog;
         protected FolderBrowserDialog folderBrowserDialog;
         protected PreferenceForm pf;
-        protected Donnees donnees;
-       
-        protected string current_folder;
+        protected Donnees donnees;       
 
+
+        //Constructeurs
         public MainForm()
         {
             //Initialisation des composants
             InitializeComponent();
-            listView1.View = View.LargeIcon;
-            listView1.LargeImageList = listePhotos;
+            listPictures.View = View.LargeIcon;
+            listPictures.LargeImageList = listPhotos;
 
             //Instanciatons des File et Browser Dialogs
             openFileDialog = new OpenFileDialog();
@@ -32,32 +33,85 @@ namespace ProjetAlbum
         {
             //association au modèle
             donnees = dnn;
-            donnees.addObserver(this);
+            donnees.AddObserver(this);
 
             //Initialisation des composants
             InitializeComponent();
-            listView1.View = View.LargeIcon;
-            listView1.LargeImageList = listePhotos;
+            listPictures.View = View.LargeIcon;
+            listPictures.LargeImageList = listPhotos;
 
             //Instanciatons des File et Browser Dialogs
             openFileDialog = new OpenFileDialog();
             folderBrowserDialog = new FolderBrowserDialog();
         }
 
-        private void button_AddAlbum(object sender, EventArgs e)
+        //Gestion des boutons
+
+        private void ButtonAddAlbum_Click(object sender, EventArgs e)
         {
-            if (donnees.path_folder_isEmpty())
+            if (donnees.PathFolderIsEmpty() || donnees.listeAlbums.Contains(new Album(this.nameNewAlbum.Text)))
                 return;
-            donnees.createAlbum(donnees.path_folder, this.nameNewAlbum.Text);
-            updateField();
+            donnees.CreateAlbum(this.nameNewAlbum.Text);
+            UpdateAlbumsField();
         }
 
-        private void quitterToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void ButtonAddPhoto_Click(object sender, EventArgs e)
+        {
+            if (donnees.CurrentAlbumIsEmpty() || donnees.PathFolderIsEmpty())
+            { return; }
+
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                System.IO.File.Copy(openFileDialog.FileName, donnees.path_folder + "\\" + donnees.current_album + "\\" + GestionDossiers.Instance.getName(openFileDialog.FileName), true);
+                listPhotos.Images.Add(Image.FromFile(donnees.path_folder + "\\" + donnees.current_album + "\\" + GestionDossiers.Instance.getName(openFileDialog.FileName)));
+                UpdateListPhotos();
+            }
+        }
+
+        private void ButtonImportAlbum_Click(object sender, EventArgs e)
+        {
+            if (donnees.PathFolderIsEmpty())
+            { return; }
+
+            //à faire
+
+        }
+
+        private void ButtonDelImage_Click(object sender, EventArgs e)
+        {
+            if (listPictures.SelectedItems.Equals(null))
+            { return; }
+
+            ListView.SelectedIndexCollection indexes = listPictures.SelectedIndices;
+
+            for (int i = indexes.Count - 1; i >= 0; i--)
+            {
+                listPhotos.Images.RemoveAt(indexes[i]);
+            }
+
+            buttonDelImage.Enabled = false;
+            UpdateListPhotos();
+        }
+
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("Albums :");
+            foreach (Album a in donnees.listeAlbums)
+            {
+                Console.WriteLine(a.nom);
+            }if (!donnees.CurrentAlbumIsEmpty())
+                Console.WriteLine("\n Album courant : " + donnees.current_album.ToString());
+        }
+
+
+        private void QuitterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void localisationToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LocalisationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (pf == null)
             {
@@ -66,92 +120,89 @@ namespace ProjetAlbum
             pf.Show();
         }
 
-        public void updateField()
-        {
-            if (donnees.path_folder_isEmpty())
-                return;
-            string[] folders = System.IO.Directory.GetDirectories(donnees.path_folder, "*", System.IO.SearchOption.TopDirectoryOnly);
-            listAlbums.Items.Clear();
-            foreach (string folderpath in folders)
-            {
-                listAlbums.Items.Add(getName(folderpath));
-            }
-        }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+
+        //Gestions des Widgets à index 
+
+
+        private void ListAlbums_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DirectoryInfo dinfo = new DirectoryInfo(donnees.path_folder + "\\"+listAlbums.SelectedItem.ToString());
+            DirectoryInfo dinfo = new DirectoryInfo(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString());
             FileInfo[] Files = dinfo.GetFiles();
-            donnees.current_album = listAlbums.SelectedItem.ToString();
+            donnees.current_album = donnees.listeAlbums[listAlbums.SelectedIndex];
+            donnees.UpdatePhotos(Files);
 
             //vide les listes
-            disposeAll();
+            DisposeAll();
 
             foreach (FileInfo file in Files)
             {
                 try
                 {                    
-                    listePhotos.Images.Add(Image.FromFile(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + file.ToString()));
+                    listPhotos.Images.Add(Image.FromFile(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + file.ToString()));
                 }
-                catch { Console.WriteLine("Image introuvable"); }
+                catch { }
                    
             }
-
-            redrawListPhotos();
+            buttonImportPhoto.Enabled = true;
+            UpdateListPhotos();
             
         }
+        
 
-        public void redrawListPhotos()
+        private void ListPictures_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listView1.Clear();
-            for (int j = 0; j < listePhotos.Images.Count; j++)
+            buttonDelImage.Enabled = true;
+        }
+
+        //Méthodes de mises à jour
+
+        public void UpdateListPhotos()
+        {
+            listPictures.Clear();
+            for (int j = 0; j < listPhotos.Images.Count; j++)
             {
                 ListViewItem item = new ListViewItem();
                 item.ImageIndex = j;
-                listView1.Items.Add(item);
+                listPictures.Items.Add(item);
             }
         }
 
-        public string getName(string absolutePath)
-        {
-            int i = absolutePath.Length-1;
-            while (!absolutePath[i].Equals('\\') || i==0)
-            {
-                i--;
-            }
-            i++;
-            return absolutePath.Substring(i, absolutePath.Length - i);
-        }
+       
 
-        public void disposeAll()
+        public void DisposeAll()
         {
-            foreach (Image img in listePhotos.Images)
+            foreach (Image img in listPhotos.Images)
             {
                 img.Dispose();
             }
-            listePhotos.Images.Clear();
-            listView1.Items.Clear();
+            listPhotos.Images.Clear();
+            listPictures.Items.Clear();
         }
 
-        private void buttonAddPhoto_Click(object sender, EventArgs e)
+        public void UpdateAlbumsField()
         {
-            if ( donnees.current_album_isEmpty() || donnees.path_folder_isEmpty() )
-                { return; }
-
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (donnees.PathFolderIsEmpty())
+                return;
+            else
             {
-                System.IO.File.Copy(openFileDialog.FileName, donnees.path_folder + "\\" + donnees.current_album + "\\" + getName(openFileDialog.FileName));
-                listePhotos.Images.Add(Image.FromFile(donnees.path_folder + "\\" + donnees.current_album + "\\" + getName(openFileDialog.FileName)));
-                redrawListPhotos();
+                buttonNewAlbum.Enabled = true;
+                buttonImportAlbum.Enabled = true;
             }
-        }
 
-        private void buttonImportAlbum_Click(object sender, EventArgs e)
-        {
-            if (donnees.path_folder_isEmpty())
-            { return; }
+            //récupérations des albums dans le dossier
+            string[] folders = System.IO.Directory.GetDirectories(donnees.path_folder, "*", System.IO.SearchOption.TopDirectoryOnly);
 
+            //ajouts dans les listes
+            donnees.UpdateAlbums(folders);
 
+            //affichage
+            listAlbums.Items.Clear();
+            foreach (string folderpath in folders)
+            {
+                listAlbums.Items.Add(GestionDossiers.Instance.getName(folderpath));
+
+            }
         }
     }
 }

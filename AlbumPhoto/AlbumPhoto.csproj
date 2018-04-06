@@ -45,7 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Graphique\DetailPhotoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Graphique\DetailPhotoForm.Designer.cs">
+      <DependentUpon>DetailPhotoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Obs\Observer.cs" />
+    <Compile Include="Outils\GestionDossiers.cs" />
     <Compile Include="Structure\Album.cs" />
     <Compile Include="Structure\Donnees.cs" />
     <Compile Include="Graphique\MainForm.cs">
@@ -63,6 +70,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Graphique\DetailPhotoForm.resx">
+      <DependentUpon>DetailPhotoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Graphique\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
