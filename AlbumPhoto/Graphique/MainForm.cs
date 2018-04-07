@@ -103,6 +103,12 @@ namespace ProjetAlbum
                 Console.WriteLine(a.nom);
             }if (!donnees.CurrentAlbumIsEmpty())
                 Console.WriteLine("\n Album courant : " + donnees.current_album.ToString());
+
+            Console.WriteLine("Liste des photos de l'album courant :");
+            foreach(Photo p in donnees.current_album.listePhotos)
+            {
+                Console.WriteLine(p.nom);
+            }
         }
 
 

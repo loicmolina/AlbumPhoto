@@ -9,7 +9,7 @@ namespace AlbumPhoto
 {
     public class Album
     {
-        private List<Photo> listePhotos;
+        public List<Photo> listePhotos { get; }
         public string nom { set; get; }
 
         public Album(string nom)
@@ -29,14 +29,27 @@ namespace AlbumPhoto
             return listePhotos[index];
         }
 
+        public bool containsPhoto(string photoName)
+        {
+            bool contains = false;
+            foreach (Photo photo in listePhotos)
+            {
+                if (photo.nom.Equals(photoName))
+                {
+                    contains = true;
+                }
+            }
+            return contains;
+        }
+
         public int getTailleAlbum()
         {
             return listePhotos.Count;
         }
 
-        public void addPhoto(string nom)
+        public void addPhoto(Photo p)
         {
-            listePhotos.Add(new Photo(nom));
+            listePhotos.Add(p);
         }
 
         public void delPhoto(string name, string path)

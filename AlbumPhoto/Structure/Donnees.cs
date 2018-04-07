@@ -31,7 +31,7 @@ namespace AlbumPhoto
         //booléen permettant de vérifier les chemins définis
         public bool PathFolderIsEmpty() { return path_folder.Equals("") || path_folder == null; }
 
-        public bool CurrentAlbumIsEmpty() { return current_album.Equals("") || current_album == null;  }
+        public bool CurrentAlbumIsEmpty() { return current_album == null;  }
         
 
 
@@ -101,12 +101,10 @@ namespace AlbumPhoto
 
         public void UpdatePhotos(FileInfo[] Files)
         {
-            if (!listeLocalisations.Contains(path_folder))
+            foreach (FileInfo file in Files)
             {
-                foreach (FileInfo file in Files)
-                {
-                    current_album.addPhoto(file.ToString());
-                }
+                if (!current_album.containsPhoto(file.ToString()))
+                    current_album.addPhoto(new Photo(file.ToString()));
             }
         }
     }
