@@ -65,7 +65,7 @@ namespace ProjetAlbum
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 System.IO.File.Copy(openFileDialog.FileName, donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(openFileDialog.FileName), true);
-                listPhotos.Images.Add(Image.FromFile(donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(openFileDialog.FileName)));
+                AjoutDansListePhotos(Image.FromFile(donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(openFileDialog.FileName)));
                 UpdateListPhotos();
             }
         }
@@ -127,8 +127,6 @@ namespace ProjetAlbum
             pf.Show();
         }
 
-
-
         //Gestions des Widgets à index 
 
 
@@ -145,9 +143,8 @@ namespace ProjetAlbum
             foreach (FileInfo file in Files)
             {
                 try
-                {                    
-                    listPhotos.Images.Add(Outils.Instance.squareImage(Image.FromFile(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + file.ToString())));
-                   
+                {
+                    AjoutDansListePhotos(Image.FromFile(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + file.ToString()));               
                 }
                 catch { }
                    
@@ -161,6 +158,13 @@ namespace ProjetAlbum
         private void ListPictures_SelectedIndexChanged(object sender, EventArgs e)
         {
             buttonDelImage.Enabled = true;
+        }
+
+        //Methodes d'ajout dans les listes
+
+        public void AjoutDansListePhotos(Image img)
+        {
+            listPhotos.Images.Add(Outils.Instance.squareImage(img));
         }
 
         //Méthodes de mises à jour

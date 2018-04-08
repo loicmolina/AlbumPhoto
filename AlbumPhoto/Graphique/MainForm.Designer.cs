@@ -41,8 +41,6 @@
             this.buttonImportPhoto = new System.Windows.Forms.Button();
             this.buttonImportAlbum = new System.Windows.Forms.Button();
             this.buttonDelImage = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.listPictures = new System.Windows.Forms.ListView();
             this.menuStrip1.SuspendLayout();
@@ -51,9 +49,9 @@
             // listAlbums
             // 
             this.listAlbums.FormattingEnabled = true;
-            this.listAlbums.Location = new System.Drawing.Point(3, 74);
+            this.listAlbums.Location = new System.Drawing.Point(3, 77);
             this.listAlbums.Name = "listAlbums";
-            this.listAlbums.Size = new System.Drawing.Size(149, 420);
+            this.listAlbums.Size = new System.Drawing.Size(149, 459);
             this.listAlbums.TabIndex = 2;
             this.listAlbums.SelectedIndexChanged += new System.EventHandler(this.ListAlbums_SelectedIndexChanged);
             // 
@@ -63,7 +61,7 @@
             this.buttonNewAlbum.Enabled = false;
             this.buttonNewAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonNewAlbum.Image = ((System.Drawing.Image)(resources.GetObject("buttonNewAlbum.Image")));
-            this.buttonNewAlbum.Location = new System.Drawing.Point(64, 35);
+            this.buttonNewAlbum.Location = new System.Drawing.Point(74, 35);
             this.buttonNewAlbum.Name = "buttonNewAlbum";
             this.buttonNewAlbum.Size = new System.Drawing.Size(38, 33);
             this.buttonNewAlbum.TabIndex = 5;
@@ -112,18 +110,18 @@
             // 
             // nameNewAlbum
             // 
-            this.nameNewAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameNewAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameNewAlbum.Location = new System.Drawing.Point(3, 36);
             this.nameNewAlbum.Multiline = true;
             this.nameNewAlbum.Name = "nameNewAlbum";
-            this.nameNewAlbum.Size = new System.Drawing.Size(62, 31);
+            this.nameNewAlbum.Size = new System.Drawing.Size(69, 31);
             this.nameNewAlbum.TabIndex = 8;
             // 
             // buttonImportPhoto
             // 
             this.buttonImportPhoto.Enabled = false;
             this.buttonImportPhoto.Image = ((System.Drawing.Image)(resources.GetObject("buttonImportPhoto.Image")));
-            this.buttonImportPhoto.Location = new System.Drawing.Point(144, 35);
+            this.buttonImportPhoto.Location = new System.Drawing.Point(158, 35);
             this.buttonImportPhoto.Name = "buttonImportPhoto";
             this.buttonImportPhoto.Size = new System.Drawing.Size(38, 33);
             this.buttonImportPhoto.TabIndex = 10;
@@ -136,7 +134,7 @@
             this.buttonImportAlbum.Enabled = false;
             this.buttonImportAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonImportAlbum.Image = ((System.Drawing.Image)(resources.GetObject("buttonImportAlbum.Image")));
-            this.buttonImportAlbum.Location = new System.Drawing.Point(101, 35);
+            this.buttonImportAlbum.Location = new System.Drawing.Point(114, 35);
             this.buttonImportAlbum.Name = "buttonImportAlbum";
             this.buttonImportAlbum.Size = new System.Drawing.Size(38, 33);
             this.buttonImportAlbum.TabIndex = 11;
@@ -147,28 +145,12 @@
             // 
             this.buttonDelImage.Enabled = false;
             this.buttonDelImage.Image = ((System.Drawing.Image)(resources.GetObject("buttonDelImage.Image")));
-            this.buttonDelImage.Location = new System.Drawing.Point(181, 35);
+            this.buttonDelImage.Location = new System.Drawing.Point(195, 35);
             this.buttonDelImage.Name = "buttonDelImage";
             this.buttonDelImage.Size = new System.Drawing.Size(38, 33);
             this.buttonDelImage.TabIndex = 12;
             this.buttonDelImage.UseVisualStyleBackColor = true;
             this.buttonDelImage.Click += new System.EventHandler(this.ButtonDelImage_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 504);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Nom :";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(44, 500);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(108, 20);
-            this.textBox1.TabIndex = 14;
             // 
             // button1
             // 
@@ -183,9 +165,9 @@
             // listPictures
             // 
             this.listPictures.LargeImageList = this.listPhotos;
-            this.listPictures.Location = new System.Drawing.Point(158, 74);
+            this.listPictures.Location = new System.Drawing.Point(158, 77);
             this.listPictures.Name = "listPictures";
-            this.listPictures.Size = new System.Drawing.Size(1336, 784);
+            this.listPictures.Size = new System.Drawing.Size(1336, 781);
             this.listPictures.SmallImageList = this.listPhotos;
             this.listPictures.TabIndex = 7;
             this.listPictures.UseCompatibleStateImageBehavior = false;
@@ -197,8 +179,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1504, 861);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonDelImage);
             this.Controls.Add(this.buttonImportAlbum);
             this.Controls.Add(this.buttonImportPhoto);
@@ -229,8 +209,6 @@
         private System.Windows.Forms.Button buttonImportPhoto;
         private System.Windows.Forms.Button buttonImportAlbum;
         private System.Windows.Forms.Button buttonDelImage;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listPictures;
     }

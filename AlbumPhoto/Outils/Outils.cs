@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AlbumPhoto.Outils
@@ -10,6 +11,7 @@ namespace AlbumPhoto.Outils
     class Outils
     {
         private static Outils instance;
+        private Regex regex = new Regex("([^\\s]+(\\.(?i)(jpe?g))$)"); //A COMPLETER
 
         private Outils() { }
 
@@ -37,8 +39,11 @@ namespace AlbumPhoto.Outils
             return absolutePath.Substring(i, absolutePath.Length - i);
         }
 
+        //converti l'image dans un carré
         public Image squareImage(Image originalImage)
         {
+            if (originalImage.Height == originalImage.Width)
+                return;
             int largestDimension = Math.Max(originalImage.Height, originalImage.Width);
             Size squareSize = new Size(largestDimension, largestDimension);
             Bitmap squareImage = new Bitmap(squareSize.Width, squareSize.Height);
