@@ -36,7 +36,6 @@
             this.fichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.localisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listPictures = new System.Windows.Forms.ListView();
             this.listPhotos = new System.Windows.Forms.ImageList(this.components);
             this.nameNewAlbum = new System.Windows.Forms.TextBox();
             this.buttonImportPhoto = new System.Windows.Forms.Button();
@@ -45,6 +44,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.listPictures = new System.Windows.Forms.ListView();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,21 +104,10 @@
             this.quitterToolStripMenuItem.Text = "Quitter";
             this.quitterToolStripMenuItem.Click += new System.EventHandler(this.QuitterToolStripMenuItem_Click);
             // 
-            // listPictures
-            // 
-            this.listPictures.LargeImageList = this.listPhotos;
-            this.listPictures.Location = new System.Drawing.Point(158, 74);
-            this.listPictures.Name = "listPictures";
-            this.listPictures.Size = new System.Drawing.Size(1336, 784);
-            this.listPictures.SmallImageList = this.listPhotos;
-            this.listPictures.TabIndex = 7;
-            this.listPictures.UseCompatibleStateImageBehavior = false;
-            this.listPictures.SelectedIndexChanged += new System.EventHandler(this.ListPictures_SelectedIndexChanged);
-            // 
             // listPhotos
             // 
             this.listPhotos.ColorDepth = System.Windows.Forms.ColorDepth.Depth16Bit;
-            this.listPhotos.ImageSize = new System.Drawing.Size(200, 200);
+            this.listPhotos.ImageSize = new System.Drawing.Size(256, 256);
             this.listPhotos.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // nameNewAlbum
@@ -191,6 +180,17 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
+            // listPictures
+            // 
+            this.listPictures.LargeImageList = this.listPhotos;
+            this.listPictures.Location = new System.Drawing.Point(158, 74);
+            this.listPictures.Name = "listPictures";
+            this.listPictures.Size = new System.Drawing.Size(1336, 784);
+            this.listPictures.SmallImageList = this.listPhotos;
+            this.listPictures.TabIndex = 7;
+            this.listPictures.UseCompatibleStateImageBehavior = false;
+            this.listPictures.SelectedIndexChanged += new System.EventHandler(this.ListPictures_SelectedIndexChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,7 +224,6 @@
         private System.Windows.Forms.ToolStripMenuItem fichierToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem localisationToolStripMenuItem;
-        private System.Windows.Forms.ListView listPictures;
         private System.Windows.Forms.ImageList listPhotos;
         private System.Windows.Forms.TextBox nameNewAlbum;
         private System.Windows.Forms.Button buttonImportPhoto;
@@ -233,6 +232,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListView listPictures;
     }
 }
 

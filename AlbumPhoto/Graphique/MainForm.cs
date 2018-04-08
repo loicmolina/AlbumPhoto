@@ -39,6 +39,7 @@ namespace ProjetAlbum
             InitializeComponent();
             listPictures.View = View.LargeIcon;
             listPictures.LargeImageList = listPhotos;
+            
 
             //Instanciatons des File et Browser Dialogs
             openFileDialog = new OpenFileDialog();
@@ -145,7 +146,8 @@ namespace ProjetAlbum
             {
                 try
                 {                    
-                    listPhotos.Images.Add(Image.FromFile(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + file.ToString()));
+                    listPhotos.Images.Add(Outils.Instance.squareImage(Image.FromFile(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + file.ToString())));
+                   
                 }
                 catch { }
                    
