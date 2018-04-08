@@ -15,10 +15,11 @@ namespace AlbumPhoto
         [STAThread]
         static void Main()
         {
-            Donnees donnees = new Donnees();
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm(donnees));
+             Donnees donnees = new Donnees();
+             Application.EnableVisualStyles();
+             Application.SetCompatibleTextRenderingDefault(false);
+             Application.Run(new MainForm(donnees));
+
         }
     }
 }

@@ -91,7 +91,7 @@ namespace AlbumPhoto
                 listeLocalisations.Add(path_folder);
                 foreach (string folder in folders)
                 {
-                    listeAlbums.Add(new Album(GestionDossiers.Instance.getName(folder)));
+                    listeAlbums.Add(new Album(Outils.Outils.Instance.getName(folder)));
                 }
             }
         }

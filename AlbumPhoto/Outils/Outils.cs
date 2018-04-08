@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace AlbumPhoto.Outils
 {
-    class GestionDossiers
+    class Outils
     {
-        private static GestionDossiers instance;
+        private static Outils instance;
 
-        private GestionDossiers() { }
+        private Outils() { }
 
-        public static GestionDossiers Instance
+        public static Outils Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new GestionDossiers();
+                    instance = new Outils();
                 }
                 return instance;
             }

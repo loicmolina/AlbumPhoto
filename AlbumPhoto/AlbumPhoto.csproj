@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.10.6\Assemblies\v4.5.2\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BDD\BDD.cs" />
     <Compile Include="Graphique\DetailPhotoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -52,7 +57,7 @@
       <DependentUpon>DetailPhotoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Obs\Observer.cs" />
-    <Compile Include="Outils\GestionDossiers.cs" />
+    <Compile Include="Outils\Outils.cs" />
     <Compile Include="Structure\Album.cs" />
     <Compile Include="Structure\Donnees.cs" />
     <Compile Include="Graphique\MainForm.cs">

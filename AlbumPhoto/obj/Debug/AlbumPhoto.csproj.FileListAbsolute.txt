@@ -44,3 +44,5 @@ D:\Projets\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.Graphique.DetailPhotoForm.
 C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.Graphique.DetailPhotoForm.resources
 C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\ProjetAlbum.MainForm.resources
 C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.PreferenceForm.resources
+C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\bin\Debug\MySql.Data.dll
+C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\bin\Debug\MySql.Data.xml

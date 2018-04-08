@@ -63,8 +63,8 @@ namespace ProjetAlbum
 
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                System.IO.File.Copy(openFileDialog.FileName, donnees.path_folder + "\\" + donnees.current_album + "\\" + GestionDossiers.Instance.getName(openFileDialog.FileName), true);
-                listPhotos.Images.Add(Image.FromFile(donnees.path_folder + "\\" + donnees.current_album + "\\" + GestionDossiers.Instance.getName(openFileDialog.FileName)));
+                System.IO.File.Copy(openFileDialog.FileName, donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(openFileDialog.FileName), true);
+                listPhotos.Images.Add(Image.FromFile(donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(openFileDialog.FileName)));
                 UpdateListPhotos();
             }
         }
@@ -206,7 +206,7 @@ namespace ProjetAlbum
             listAlbums.Items.Clear();
             foreach (string folderpath in folders)
             {
-                listAlbums.Items.Add(GestionDossiers.Instance.getName(folderpath));
+                listAlbums.Items.Add(Outils.Instance.getName(folderpath));
 
             }
         }
