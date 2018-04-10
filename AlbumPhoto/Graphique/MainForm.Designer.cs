@@ -39,7 +39,7 @@
             this.listPhotos = new System.Windows.Forms.ImageList(this.components);
             this.nameNewAlbum = new System.Windows.Forms.TextBox();
             this.buttonImportPhoto = new System.Windows.Forms.Button();
-            this.buttonImportAlbum = new System.Windows.Forms.Button();
+            this.buttonDelAlbum = new System.Windows.Forms.Button();
             this.buttonDelImage = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.listPictures = new System.Windows.Forms.ListView();
@@ -128,18 +128,18 @@
             this.buttonImportPhoto.UseVisualStyleBackColor = true;
             this.buttonImportPhoto.Click += new System.EventHandler(this.ButtonAddPhoto_Click);
             // 
-            // buttonImportAlbum
+            // buttonDelAlbum
             // 
-            this.buttonImportAlbum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.buttonImportAlbum.Enabled = false;
-            this.buttonImportAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonImportAlbum.Image = ((System.Drawing.Image)(resources.GetObject("buttonImportAlbum.Image")));
-            this.buttonImportAlbum.Location = new System.Drawing.Point(114, 35);
-            this.buttonImportAlbum.Name = "buttonImportAlbum";
-            this.buttonImportAlbum.Size = new System.Drawing.Size(38, 33);
-            this.buttonImportAlbum.TabIndex = 11;
-            this.buttonImportAlbum.UseVisualStyleBackColor = true;
-            this.buttonImportAlbum.Click += new System.EventHandler(this.ButtonImportAlbum_Click);
+            this.buttonDelAlbum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonDelAlbum.Enabled = false;
+            this.buttonDelAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelAlbum.Image = ((System.Drawing.Image)(resources.GetObject("buttonDelAlbum.Image")));
+            this.buttonDelAlbum.Location = new System.Drawing.Point(114, 35);
+            this.buttonDelAlbum.Name = "buttonDelAlbum";
+            this.buttonDelAlbum.Size = new System.Drawing.Size(38, 33);
+            this.buttonDelAlbum.TabIndex = 11;
+            this.buttonDelAlbum.UseVisualStyleBackColor = true;
+            this.buttonDelAlbum.Click += new System.EventHandler(this.ButtonDelAlbum_Click);
             // 
             // buttonDelImage
             // 
@@ -158,12 +158,13 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 15;
-            this.button1.Text = "button1";
+            this.button1.Text = "TEST";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // listPictures
             // 
+            this.listPictures.AllowDrop = true;
             this.listPictures.LargeImageList = this.listPhotos;
             this.listPictures.Location = new System.Drawing.Point(158, 77);
             this.listPictures.Name = "listPictures";
@@ -172,6 +173,8 @@
             this.listPictures.TabIndex = 7;
             this.listPictures.UseCompatibleStateImageBehavior = false;
             this.listPictures.SelectedIndexChanged += new System.EventHandler(this.ListPictures_SelectedIndexChanged);
+            this.listPictures.DragDrop += new System.Windows.Forms.DragEventHandler(this.listPictures_DragDrop);
+            this.listPictures.DragEnter += new System.Windows.Forms.DragEventHandler(this.listPictures_DragEnter);
             // 
             // MainForm
             // 
@@ -180,7 +183,7 @@
             this.ClientSize = new System.Drawing.Size(1504, 861);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonDelImage);
-            this.Controls.Add(this.buttonImportAlbum);
+            this.Controls.Add(this.buttonDelAlbum);
             this.Controls.Add(this.buttonImportPhoto);
             this.Controls.Add(this.nameNewAlbum);
             this.Controls.Add(this.listPictures);
@@ -207,7 +210,7 @@
         private System.Windows.Forms.ImageList listPhotos;
         private System.Windows.Forms.TextBox nameNewAlbum;
         private System.Windows.Forms.Button buttonImportPhoto;
-        private System.Windows.Forms.Button buttonImportAlbum;
+        private System.Windows.Forms.Button buttonDelAlbum;
         private System.Windows.Forms.Button buttonDelImage;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listPictures;

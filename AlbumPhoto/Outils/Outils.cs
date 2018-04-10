@@ -27,6 +27,11 @@ namespace AlbumPhoto.Outils
             }
         }
 
+        //retourne un booleen selon le type du fichier (JPEG ou non)
+        public bool IsCorrectType(string filename) {
+            return regex.IsMatch(filename);
+        }
+
         //retourne le nom du fichier/dossier en supprimant le path
         public string getName(string absolutePath)
         {
@@ -43,7 +48,7 @@ namespace AlbumPhoto.Outils
         public Image squareImage(Image originalImage)
         {
             if (originalImage.Height == originalImage.Width)
-                return;
+                return originalImage;
             int largestDimension = Math.Max(originalImage.Height, originalImage.Width);
             Size squareSize = new Size(largestDimension, largestDimension);
             Bitmap squareImage = new Bitmap(squareSize.Width, squareSize.Height);

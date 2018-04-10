@@ -19,7 +19,6 @@ namespace AlbumPhoto
              Application.EnableVisualStyles();
              Application.SetCompatibleTextRenderingDefault(false);
              Application.Run(new MainForm(donnees));
-
         }
     }
 }
