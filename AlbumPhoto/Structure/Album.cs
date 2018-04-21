@@ -52,6 +52,13 @@ namespace AlbumPhoto
             listePhotos.Add(p);
         }
 
+        public void addPhoto(Photo p, int index)
+        {
+            if (listePhotos.Count == 0)
+                listePhotos.Add(p);
+            listePhotos.Insert(index, p);
+        }
+
         public void delPhoto(string name, string path)
         {
             File.Delete(path+"//"+name);

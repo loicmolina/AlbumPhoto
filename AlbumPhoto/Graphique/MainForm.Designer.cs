@@ -1,4 +1,6 @@
-﻿namespace ProjetAlbum
+﻿using System.Windows.Forms;
+
+namespace ProjetAlbum
 {
     partial class MainForm
     {
@@ -43,6 +45,8 @@
             this.buttonDelImage = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.listPictures = new System.Windows.Forms.ListView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttonRecherche = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -167,6 +171,7 @@
             this.listPictures.AllowDrop = true;
             this.listPictures.LargeImageList = this.listPhotos;
             this.listPictures.Location = new System.Drawing.Point(158, 77);
+            this.listPictures.MaximumSize = new System.Drawing.Size(1336, 781);
             this.listPictures.Name = "listPictures";
             this.listPictures.Size = new System.Drawing.Size(1336, 781);
             this.listPictures.SmallImageList = this.listPhotos;
@@ -175,12 +180,31 @@
             this.listPictures.SelectedIndexChanged += new System.EventHandler(this.ListPictures_SelectedIndexChanged);
             this.listPictures.DragDrop += new System.Windows.Forms.DragEventHandler(this.listPictures_DragDrop);
             this.listPictures.DragEnter += new System.Windows.Forms.DragEventHandler(this.listPictures_DragEnter);
+            this.listPictures.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listPictures_MouseDoubleClick);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(1073, 49);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(346, 20);
+            this.textBox1.TabIndex = 16;
+            // 
+            // buttonRecherche
+            // 
+            this.buttonRecherche.Location = new System.Drawing.Point(1419, 48);
+            this.buttonRecherche.Name = "buttonRecherche";
+            this.buttonRecherche.Size = new System.Drawing.Size(75, 22);
+            this.buttonRecherche.TabIndex = 17;
+            this.buttonRecherche.Text = "Rechercher";
+            this.buttonRecherche.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1504, 861);
+            this.Controls.Add(this.buttonRecherche);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonDelImage);
             this.Controls.Add(this.buttonDelAlbum);
@@ -190,6 +214,7 @@
             this.Controls.Add(this.buttonNewAlbum);
             this.Controls.Add(this.listAlbums);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Form1";
@@ -214,6 +239,8 @@
         private System.Windows.Forms.Button buttonDelImage;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listPictures;
+        private TextBox textBox1;
+        private Button buttonRecherche;
     }
 }
 

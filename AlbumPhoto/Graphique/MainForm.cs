@@ -1,4 +1,5 @@
 ﻿using AlbumPhoto;
+using AlbumPhoto.Graphique;
 using AlbumPhoto.Obs;
 using AlbumPhoto.Outils;
 using System;
@@ -141,25 +142,30 @@ namespace ProjetAlbum
 
         private void ListAlbums_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DirectoryInfo dinfo = new DirectoryInfo(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString());
-            FileInfo[] Files = dinfo.GetFiles();
-            donnees.current_album = donnees.listeAlbums[listAlbums.SelectedIndex];
-            donnees.UpdatePhotos(Files);
-            
-            DisposeAll();
-
-            foreach (FileInfo file in Files)
+            try
             {
-                try
+                DirectoryInfo dinfo = new DirectoryInfo(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString());
+                FileInfo[] Files = dinfo.GetFiles();
+                donnees.current_album = donnees.listeAlbums[listAlbums.SelectedIndex];
+                donnees.UpdatePhotos(Files);
+
+                DisposeAll();
+
+                foreach (FileInfo file in Files)
                 {
-                    if (Outils.Instance.IsCorrectType(file.Name))
-                        AjoutDansListePhotos(Image.FromFile(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + file.ToString()));               
+                    try
+                    {
+                        if (Outils.Instance.IsCorrectType(file.Name))
+                            AjoutDansListePhotosForm(Image.FromFile(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + file.ToString()));
+                    }
+                    catch { }
+
                 }
-                catch { }
-                   
+                buttonImportPhoto.Enabled = true;
+                UpdateListPhotos();
             }
-            buttonImportPhoto.Enabled = true;
-            UpdateListPhotos();            
+            catch{  }
+                
         }
         
 
@@ -171,7 +177,7 @@ namespace ProjetAlbum
 
         //Methodes d'ajout des photos
 
-        public void AjoutDansListePhotos(Image img)
+        public void AjoutDansListePhotosForm(Image img)
         {
             listPhotos.Images.Add(Outils.Instance.squareImage(img));
         }
@@ -179,13 +185,23 @@ namespace ProjetAlbum
         public void AjoutPhoto(string filename)
         {            
             System.IO.File.Copy(filename, donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename), true);
-            AjoutDansListePhotos(Image.FromFile(donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename)));
+            AjoutDansListePhotosForm(Image.FromFile(donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename)));
+            AjoutDansListePhotosModele(Outils.Instance.getName(filename));
         }
         
+        public void AjoutDansListePhotosModele(string nom)
+        {
+            int i = 0;
 
+            //Tant qu'on a pas atteint la fin de la liste ou que le mot de la liste se situe avant nom alphabétiquement
+            while (i < donnees.current_album.listePhotos.Count && string.Compare(nom, donnees.current_album.listePhotos[i].nom) > -1)
+            {
+                i++;
+            }
+            donnees.current_album.addPhoto(new Photo(nom), i);
+        }
 
         //Méthodes de mises à jour
-
 
 
         public void UpdateListPhotos()
@@ -239,6 +255,8 @@ namespace ProjetAlbum
 
         private void listPictures_DragDrop(object sender, DragEventArgs e)
         {
+            if (donnees.CurrentAlbumIsEmpty())
+                return;
             string[] fileList = e.Data.GetData(DataFormats.FileDrop) as string[];
             foreach (string filename in fileList)
             {
@@ -250,7 +268,17 @@ namespace ProjetAlbum
 
         private void listPictures_DragEnter(object sender, DragEventArgs e)
         {
+            if (donnees.CurrentAlbumIsEmpty())
+                return;
             e.Effect = DragDropEffects.Copy;
+        }
+
+        private void listPictures_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listPictures.SelectedIndices.Count == 0 || listPictures.SelectedIndices.Count > 1)
+                return;
+            DetailPhotoForm dpf = new DetailPhotoForm(donnees.current_album.getPhoto( listPictures.SelectedIndices[0] ), donnees);
+            dpf.Show();
         }
     }
 }
