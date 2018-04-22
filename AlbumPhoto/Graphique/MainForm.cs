@@ -84,8 +84,15 @@ namespace ProjetAlbum
         {
             if (donnees.PathFolderIsEmpty() || donnees.CurrentAlbumIsEmpty())
                 { return; }
+
+            //suppression des éléments dans l'album
+            listPhotos.Images[0].Dispose();
+            listPictures.Items.Clear();
+            donnees.current_album.listePhotos[0] = null;
+
+
             Directory.Delete(donnees.path_folder + "\\" + listAlbums.Items[ listAlbums.SelectedIndex ], true);
-            listAlbums.Items.RemoveAt( listAlbums.SelectedIndices[ listAlbums.SelectedIndex ] );       
+            listAlbums.Items.RemoveAt(  listAlbums.SelectedIndex  );       
         }
 
         private void ButtonDelImage_Click(object sender, EventArgs e)
@@ -149,14 +156,14 @@ namespace ProjetAlbum
                 donnees.current_album = donnees.listeAlbums[listAlbums.SelectedIndex];
                 donnees.UpdatePhotos(Files);
 
-                DisposeAll();
+                DisposeAllPhotosForm();
 
                 foreach (FileInfo file in Files)
                 {
                     try
                     {
                         if (Outils.Instance.IsCorrectType(file.Name))
-                            AjoutDansListePhotosForm(Image.FromFile(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + file.ToString()));
+                            AjoutDansListePhotosForm(file.Name,Image.FromFile(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + file.ToString()));
                     }
                     catch { }
 
@@ -177,15 +184,15 @@ namespace ProjetAlbum
 
         //Methodes d'ajout des photos
 
-        public void AjoutDansListePhotosForm(Image img)
+        public void AjoutDansListePhotosForm(string name, Image img)
         {
-            listPhotos.Images.Add(Outils.Instance.squareImage(img));
+            listPhotos.Images.Add(name, Outils.Instance.squareImage(img));
         }
 
         public void AjoutPhoto(string filename)
         {            
             System.IO.File.Copy(filename, donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename), true);
-            AjoutDansListePhotosForm(Image.FromFile(donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename)));
+            AjoutDansListePhotosForm(Outils.Instance.getName(filename), Image.FromFile(donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename)));
             AjoutDansListePhotosModele(Outils.Instance.getName(filename));
         }
         
@@ -216,7 +223,7 @@ namespace ProjetAlbum
         }
 
         //vide les listes
-        public void DisposeAll()
+        public void DisposeAllPhotosForm()
         {
             foreach (Image img in listPhotos.Images)
             {
@@ -235,8 +242,7 @@ namespace ProjetAlbum
                 buttonNewAlbum.Enabled = true;
                 buttonDelAlbum.Enabled = true;
             }
-
-            Console.WriteLine(donnees.path_folder);
+            
             //récupérations des albums dans le dossier
             string[] folders = System.IO.Directory.GetDirectories(donnees.path_folder, "*", System.IO.SearchOption.TopDirectoryOnly);
 
@@ -277,7 +283,7 @@ namespace ProjetAlbum
         {
             if (listPictures.SelectedIndices.Count == 0 || listPictures.SelectedIndices.Count > 1)
                 return;
-            DetailPhotoForm dpf = new DetailPhotoForm(donnees.current_album.getPhoto( listPictures.SelectedIndices[0] ), donnees);
+            DetailPhotoForm dpf = new DetailPhotoForm(donnees.current_album.getPhoto(listPictures.SelectedIndices[0]), donnees);
             dpf.Show();
         }
     }
