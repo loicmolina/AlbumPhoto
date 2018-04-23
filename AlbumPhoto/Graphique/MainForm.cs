@@ -156,7 +156,7 @@ namespace ProjetAlbum
                     try
                     {
                         if (Outils.Instance.IsCorrectType(file.Name))
-                            AjoutDansListePhotosForm(Image.FromFile(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + file.ToString()));
+                            AjoutDansListePhotosForm(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + file.ToString());
                     }
                     catch { }
 
@@ -177,15 +177,18 @@ namespace ProjetAlbum
 
         //Methodes d'ajout des photos
 
-        public void AjoutDansListePhotosForm(Image img)
+        public void AjoutDansListePhotosForm(string img_fullname)
         {
-            listPhotos.Images.Add(Outils.Instance.squareImage(img));
+            using(Image image = Image.FromFile(img_fullname))
+            {
+                listPhotos.Images.Add(Outils.Instance.squareImage(image));
+            }  
         }
 
         public void AjoutPhoto(string filename)
         {            
             System.IO.File.Copy(filename, donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename), true);
-            AjoutDansListePhotosForm(Image.FromFile(donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename)));
+            AjoutDansListePhotosForm(donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename));
             AjoutDansListePhotosModele(Outils.Instance.getName(filename));
         }
         
