@@ -187,6 +187,7 @@ namespace ProjetAlbum
             this.textBoxRecherche.Name = "textBoxRecherche";
             this.textBoxRecherche.Size = new System.Drawing.Size(346, 20);
             this.textBoxRecherche.TabIndex = 16;
+            this.textBoxRecherche.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxRecherche_KeyDown);
             // 
             // buttonRecherche
             // 

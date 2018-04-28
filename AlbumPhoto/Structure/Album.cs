@@ -80,7 +80,11 @@ namespace AlbumPhoto
 
         public void addPhoto(Photo p)
         {
-            listePhotos.Add(p);
+            if (!this.containsPhoto(p.nom))
+            {
+                Console.WriteLine("AJOUT DE L'IMAGE DANS LE MODELE : " + p.nom);
+                listePhotos.Add(p);
+            }
         }
 
         public void addPhoto(Photo p, int index)
