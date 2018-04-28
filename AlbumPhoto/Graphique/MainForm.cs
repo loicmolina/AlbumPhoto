@@ -200,11 +200,17 @@ namespace ProjetAlbum
 
         public void AjoutPhoto(string filename)
         {
+            if (donnees.current_album.containsPhoto(Outils.Instance.getName(filename)))
+                return;
+
+            Console.WriteLine("AJOUT LOLOL DE " + filename);
+            
+
             if (Outils.Instance.IsCorrectType(filename))
             {
                 System.IO.File.Copy(filename, donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename), true);
                 AjoutDansListePhotosModele(Outils.Instance.getName(filename));
-                AjoutDansListePhotosForm(donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename));       
+                AjoutDansListePhotosForm(donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename));
             }
         }
         
