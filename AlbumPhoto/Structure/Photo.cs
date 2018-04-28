@@ -9,7 +9,7 @@ namespace AlbumPhoto
     public class Photo
     {
         public string nom { get; set; }
-        protected List<string> tags;
+        public List<string> tags { get; }
 
         public Photo(string nm)
         {
@@ -17,9 +17,23 @@ namespace AlbumPhoto
             tags = new List<string>();
         }
 
-        public void addTag(string tag)
+        public void AddTag(string tag)
         {
             tags.Add(tag);
+        }
+
+        public void ClearTags()
+        {
+            tags.Clear();
+        }
+
+        public void DisplayTags()
+        {
+           Console.WriteLine("Liste des tags pour l'image " + nom);
+           foreach(string s in tags)
+            {
+                Console.WriteLine("-"+s);
+            }
         }
 
         public int getSizeTags()

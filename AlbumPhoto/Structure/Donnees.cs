@@ -3,6 +3,7 @@ using AlbumPhoto.Outils;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace AlbumPhoto
@@ -12,6 +13,7 @@ namespace AlbumPhoto
         protected List<Observer> listeObservers;
         public List<Album> listeAlbums { get; }
         public List<string> listeLocalisations { get; }
+        public List<string[]> listeResultats { get; }
         public String path_folder { get; set; }
         public Album current_album { get; set; }
 
@@ -23,9 +25,15 @@ namespace AlbumPhoto
             listeObservers = new List<Observer>();
             listeAlbums = new List<Album>();
             listeLocalisations = new List<string>();
+            listeResultats = new List<string[]>();
             path_folder = "";
         }
 
+        //Vider les listes
+        public void cleanListeAlbums()
+        {
+            listeAlbums.Clear();
+        }
 
 
         //booléen permettant de vérifier les chemins définis
@@ -71,7 +79,12 @@ namespace AlbumPhoto
         public void CreateAlbum(String name)
         {
             Directory.CreateDirectory(path_folder+ "\\"+name);
-            listeAlbums.Add(new Album(name));
+            int i = 0;
+            while (i < listeAlbums.Count && string.Compare(name, listeAlbums[i].nom) > -1) //placement correct dans l'ordre alphabétique
+            {
+                i++;
+            }
+            listeAlbums.Insert(i, new Album(name));
         }
 
         public void DeleteAlbum(String name)
@@ -103,9 +116,33 @@ namespace AlbumPhoto
         {
             foreach (FileInfo file in Files)
             {
-                if (!current_album.containsPhoto(file.ToString()))
+                if (!current_album.containsPhoto(file.ToString()) && Outils.Outils.Instance.IsCorrectType(file.ToString()))
                     current_album.addPhoto(new Photo(file.ToString()));
             }
         }
+
+        public Photo getPhoto(string nomAlbum, string nomPhoto)
+        {
+            return this.GetAlbum(nomAlbum).getPhoto(nomPhoto);
+        }
+
+        //Méthodes de recherches
+
+        public void ChercherResultats(List<string> motscles)
+        {
+            foreach (Album a in listeAlbums)
+            {
+                foreach(Photo p in a.listePhotos)
+                {
+                    if (!motscles.Except(p.tags).Any() == true)
+                    {
+                        string[] res = new string[2];
+                        res[0] = a.nom;
+                        res[1] = p.nom;
+                        listeResultats.Add(res);
+                    }       
+                }
+            }
+        }        
     }
 }

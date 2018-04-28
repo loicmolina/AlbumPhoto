@@ -16,20 +16,33 @@ namespace AlbumPhoto.Graphique
         protected Image originalImage;
         protected Donnees donnees;
 
-        public DetailPhotoForm(Photo photo,Donnees donnees)
+        public DetailPhotoForm(Album album, Photo photo,Donnees donnees)
         {
             InitializeComponent();
             this.currentPhoto = photo;
             this.donnees = donnees;
             this.labelPictureName.Text = photo.nom;
+            foreach(string s in this.currentPhoto.tags)
+            {
+                this.textBoxTags.Text += s+"\n";
+            }
             
-            image.Image = Image.FromFile(donnees.path_folder + "//" + donnees.current_album + "//"+photo.nom);
+            image.Image = Image.FromFile(donnees.path_folder + "//" + album.nom + "//"+photo.nom);
             originalImage = image.Image;
         }
 
         private void registerButton_Click(object sender, EventArgs e)
         {
-            
+            if (textBoxTags.Text == "")
+                return;
+
+            this.currentPhoto.ClearTags();
+            string[] tagsRegistered = textBoxTags.Text.Split('\n');
+            foreach(string s in tagsRegistered)
+            {
+                this.currentPhoto.AddTag(s);
+            }
+            this.Close();
         }
 
         private void trackBarZoom_Scroll(object sender, EventArgs e)

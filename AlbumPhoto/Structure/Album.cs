@@ -29,6 +29,37 @@ namespace AlbumPhoto
             return listePhotos[index];
         }
 
+        public Photo getPhoto(string nom)
+        {
+            int index = getIndexPhoto(nom);
+            Console.WriteLine("On reçoit " + index);
+            return listePhotos[index];
+        }
+
+        public int getIndexPhoto(String nomRecherche)
+        {
+            if (listePhotos.Count == 0)
+                return -1;
+            Console.WriteLine("On cherche l'image : " + nomRecherche);
+            Console.WriteLine("Nombre de photos dans l'album : " + listePhotos.Count);
+            int i = 0;
+            int res = -1;
+            while (i < listePhotos.Count)
+            {
+                Console.WriteLine("i : " + i);
+                Console.WriteLine("nom de l'image au rang i : " + listePhotos[i].nom);
+                if (listePhotos[i].nom.Equals(nomRecherche))
+                {
+                    Console.WriteLine("trouvé");
+                    res = i;
+                    break;
+                }
+                i++;
+            }
+            Console.WriteLine("On renvoit "+res);
+            return res;
+        }
+
         public bool containsPhoto(string photoName)
         {
             bool contains = false;

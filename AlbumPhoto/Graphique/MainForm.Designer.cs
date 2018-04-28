@@ -45,7 +45,7 @@ namespace ProjetAlbum
             this.buttonDelImage = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.listPictures = new System.Windows.Forms.ListView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxRecherche = new System.Windows.Forms.TextBox();
             this.buttonRecherche = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -115,10 +115,9 @@ namespace ProjetAlbum
             // nameNewAlbum
             // 
             this.nameNewAlbum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameNewAlbum.Location = new System.Drawing.Point(3, 36);
-            this.nameNewAlbum.Multiline = true;
+            this.nameNewAlbum.Location = new System.Drawing.Point(3, 37);
             this.nameNewAlbum.Name = "nameNewAlbum";
-            this.nameNewAlbum.Size = new System.Drawing.Size(69, 31);
+            this.nameNewAlbum.Size = new System.Drawing.Size(69, 26);
             this.nameNewAlbum.TabIndex = 8;
             // 
             // buttonImportPhoto
@@ -182,12 +181,12 @@ namespace ProjetAlbum
             this.listPictures.DragEnter += new System.Windows.Forms.DragEventHandler(this.listPictures_DragEnter);
             this.listPictures.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listPictures_MouseDoubleClick);
             // 
-            // textBox1
+            // textBoxRecherche
             // 
-            this.textBox1.Location = new System.Drawing.Point(1073, 49);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(346, 20);
-            this.textBox1.TabIndex = 16;
+            this.textBoxRecherche.Location = new System.Drawing.Point(1073, 49);
+            this.textBoxRecherche.Name = "textBoxRecherche";
+            this.textBoxRecherche.Size = new System.Drawing.Size(346, 20);
+            this.textBoxRecherche.TabIndex = 16;
             // 
             // buttonRecherche
             // 
@@ -197,6 +196,7 @@ namespace ProjetAlbum
             this.buttonRecherche.TabIndex = 17;
             this.buttonRecherche.Text = "Rechercher";
             this.buttonRecherche.UseVisualStyleBackColor = true;
+            this.buttonRecherche.Click += new System.EventHandler(this.buttonRecherche_Click);
             // 
             // MainForm
             // 
@@ -204,7 +204,7 @@ namespace ProjetAlbum
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1504, 861);
             this.Controls.Add(this.buttonRecherche);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxRecherche);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonDelImage);
             this.Controls.Add(this.buttonDelAlbum);
@@ -239,7 +239,7 @@ namespace ProjetAlbum
         private System.Windows.Forms.Button buttonDelImage;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listPictures;
-        private TextBox textBox1;
+        private TextBox textBoxRecherche;
         private Button buttonRecherche;
     }
 }

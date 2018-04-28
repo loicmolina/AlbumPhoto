@@ -11,7 +11,7 @@ namespace AlbumPhoto.Outils
     class Outils
     {
         private static Outils instance;
-        private Regex regex = new Regex("([^\\s]+(\\.(?i)(jpe?g))$)"); //A COMPLETER
+        private Regex regex = new Regex("([^\\s]+(\\.(?i)(jpe?g))$)");
 
         private Outils() { }
 
