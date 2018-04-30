@@ -203,9 +203,6 @@ namespace ProjetAlbum
             if (donnees.current_album.containsPhoto(Outils.Instance.getName(filename)))
                 return;
 
-            Console.WriteLine("AJOUT LOLOL DE " + filename);
-            
-
             if (Outils.Instance.IsCorrectType(filename))
             {
                 System.IO.File.Copy(filename, donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename), true);
@@ -308,8 +305,7 @@ namespace ProjetAlbum
             
             foreach (string filename in fileList)
             {
-                if (Outils.Instance.IsCorrectType(filename))
-                    AjoutPhoto(filename);
+                AjoutPhoto(filename);
             }
             RefreshImagesForm();
         }
