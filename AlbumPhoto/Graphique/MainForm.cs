@@ -162,6 +162,7 @@ namespace ProjetAlbum
 
         private void ListAlbums_SelectedIndexChanged(object sender, EventArgs e)
         {
+            buttonDelAlbum.Enabled = true;
             try
             {
                 DirectoryInfo dinfo = new DirectoryInfo(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString());
@@ -268,6 +269,7 @@ namespace ProjetAlbum
             listPhotos.Images.Clear();
             listPictures.Clear();
             listPictures.Items.Clear();
+            GC.Collect();
         }
 
         public void UpdateAlbumsField()
@@ -277,7 +279,6 @@ namespace ProjetAlbum
             else
             {
                 buttonNewAlbum.Enabled = true;
-                buttonDelAlbum.Enabled = true;
             }
 
             //Console.WriteLine("Chemin des albums :" + donnees.path_folder);
@@ -353,6 +354,8 @@ namespace ProjetAlbum
                 return;
 
             List<string> ListeMotsCles = textBoxRecherche.Text.Split(',').ToList();
+            Outils.Instance.TrimList(ListeMotsCles);
+
             donnees.ChercherResultats(ListeMotsCles);
 
             //Deselectionne Album
@@ -371,6 +374,7 @@ namespace ProjetAlbum
 
         private void buttonRecherche_Click(object sender, EventArgs e)
         {
+            buttonDelAlbum.Enabled = true;
             EffectuerRecherche();
         }
 

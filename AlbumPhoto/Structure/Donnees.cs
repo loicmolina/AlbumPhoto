@@ -131,6 +131,8 @@ namespace AlbumPhoto
         public void ChercherResultats(List<string> motscles)
         {
             listeResultats.Clear();
+            current_album = null;
+
             foreach (Album a in listeAlbums)
             {
                 foreach(Photo p in a.listePhotos)

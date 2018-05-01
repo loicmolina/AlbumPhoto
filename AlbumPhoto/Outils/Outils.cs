@@ -63,5 +63,14 @@ namespace AlbumPhoto.Outils
             }
             return squareImage;
         }
+
+        //Supprime les espaces d'une liste
+        public void TrimList(List<string> liste)
+        {
+            for(int i = 0; i< liste.Count; i++)
+            {
+                liste[i] = liste[i].Trim();
+            }   
+        }
     }
 }

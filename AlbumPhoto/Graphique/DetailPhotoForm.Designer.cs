@@ -37,6 +37,8 @@ namespace AlbumPhoto.Graphique
             this.labelPictureName = new System.Windows.Forms.Label();
             this.image = new System.Windows.Forms.PictureBox();
             this.trackBarZoom = new System.Windows.Forms.TrackBar();
+            this.labelAlbum = new System.Windows.Forms.Label();
+            this.labelAlbumName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).BeginInit();
             this.SuspendLayout();
@@ -62,6 +64,7 @@ namespace AlbumPhoto.Graphique
             // 
             // textBoxTags
             // 
+            this.textBoxTags.AcceptsReturn = true;
             this.textBoxTags.Location = new System.Drawing.Point(443, 99);
             this.textBoxTags.Multiline = true;
             this.textBoxTags.Name = "textBoxTags";
@@ -97,11 +100,29 @@ namespace AlbumPhoto.Graphique
             // 
             // trackBarZoom
             // 
-            this.trackBarZoom.Location = new System.Drawing.Point(402, 52);
+            this.trackBarZoom.Location = new System.Drawing.Point(402, 59);
             this.trackBarZoom.Name = "trackBarZoom";
             this.trackBarZoom.Size = new System.Drawing.Size(253, 45);
             this.trackBarZoom.TabIndex = 9;
             this.trackBarZoom.Scroll += new System.EventHandler(this.trackBarZoom_Scroll);
+            // 
+            // labelAlbum
+            // 
+            this.labelAlbum.AutoSize = true;
+            this.labelAlbum.Location = new System.Drawing.Point(392, 37);
+            this.labelAlbum.Name = "labelAlbum";
+            this.labelAlbum.Size = new System.Drawing.Size(42, 13);
+            this.labelAlbum.TabIndex = 10;
+            this.labelAlbum.Text = "Album :";
+            // 
+            // labelAlbumName
+            // 
+            this.labelAlbumName.AutoSize = true;
+            this.labelAlbumName.Location = new System.Drawing.Point(440, 37);
+            this.labelAlbumName.Name = "labelAlbumName";
+            this.labelAlbumName.Size = new System.Drawing.Size(35, 13);
+            this.labelAlbumName.TabIndex = 11;
+            this.labelAlbumName.Text = "label1";
             // 
             // DetailPhotoForm
             // 
@@ -110,13 +131,15 @@ namespace AlbumPhoto.Graphique
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(679, 407);
-            this.Controls.Add(this.trackBarZoom);
+            this.Controls.Add(this.labelAlbumName);
+            this.Controls.Add(this.labelAlbum);
             this.Controls.Add(this.image);
             this.Controls.Add(this.labelPictureName);
             this.Controls.Add(this.textBoxTags);
             this.Controls.Add(this.labeTags);
             this.Controls.Add(this.registerButton);
             this.Controls.Add(this.labelName);
+            this.Controls.Add(this.trackBarZoom);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "DetailPhotoForm";
             this.Text = "DetailPhotoForm";
@@ -136,5 +159,7 @@ namespace AlbumPhoto.Graphique
         private System.Windows.Forms.Label labelPictureName;
         private PictureBox image;
         private TrackBar trackBarZoom;
+        private Label labelAlbum;
+        private Label labelAlbumName;
     }
 }

@@ -22,11 +22,12 @@ namespace AlbumPhoto.Graphique
             this.currentPhoto = photo;
             this.donnees = donnees;
             this.labelPictureName.Text = photo.nom;
-            foreach(string s in this.currentPhoto.tags)
+            this.labelAlbumName.Text = album.nom;
+            foreach (string s in this.currentPhoto.tags)
             {
-                this.textBoxTags.Text += s+"\n";
+                this.textBoxTags.Text += s;
+                this.textBoxTags.Text += "\r\n";
             }
-            
             image.Image = Image.FromFile(donnees.path_folder + "//" + album.nom + "//"+photo.nom);
             originalImage = image.Image;
         }
@@ -40,7 +41,7 @@ namespace AlbumPhoto.Graphique
             string[] tagsRegistered = textBoxTags.Text.Split('\n');
             foreach(string s in tagsRegistered)
             {
-                this.currentPhoto.AddTag(s);
+                this.currentPhoto.AddTag(s.TrimEnd());
             }
             this.Close();
         }
