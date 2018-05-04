@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -64,6 +65,17 @@ namespace AlbumPhoto.Outils
             return squareImage;
         }
 
+        //Copie image
+        public Image copyImage(Image originalImage)
+        {
+            Bitmap newImage = new Bitmap(originalImage.Width, originalImage.Height);
+            using (Graphics graphics = Graphics.FromImage(newImage))
+            {
+                graphics.DrawImage(originalImage, new Rectangle(0, 0, newImage.Width, newImage.Height));
+            }
+            return newImage;
+        }
+
         //Supprime les espaces d'une liste
         public void TrimList(List<string> liste)
         {
@@ -71,6 +83,12 @@ namespace AlbumPhoto.Outils
             {
                 liste[i] = liste[i].Trim();
             }   
+        }
+
+        //
+        public PropertyItem getPropertyItemByID(Image img, int Id)
+        {
+            return img.PropertyItems.Select(x => x).FirstOrDefault(x => x.Id == Id);
         }
     }
 }

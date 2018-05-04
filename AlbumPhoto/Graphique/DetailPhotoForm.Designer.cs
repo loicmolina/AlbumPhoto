@@ -46,7 +46,7 @@ namespace AlbumPhoto.Graphique
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(399, 16);
+            this.labelName.Location = new System.Drawing.Point(399, 18);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(35, 13);
             this.labelName.TabIndex = 1;
@@ -65,16 +65,16 @@ namespace AlbumPhoto.Graphique
             // textBoxTags
             // 
             this.textBoxTags.AcceptsReturn = true;
-            this.textBoxTags.Location = new System.Drawing.Point(443, 99);
+            this.textBoxTags.Location = new System.Drawing.Point(444, 123);
             this.textBoxTags.Multiline = true;
             this.textBoxTags.Name = "textBoxTags";
-            this.textBoxTags.Size = new System.Drawing.Size(212, 214);
+            this.textBoxTags.Size = new System.Drawing.Size(212, 220);
             this.textBoxTags.TabIndex = 5;
             // 
             // labeTags
             // 
             this.labeTags.AutoSize = true;
-            this.labeTags.Location = new System.Drawing.Point(401, 102);
+            this.labeTags.Location = new System.Drawing.Point(397, 126);
             this.labeTags.Name = "labeTags";
             this.labeTags.Size = new System.Drawing.Size(37, 13);
             this.labeTags.TabIndex = 4;
@@ -83,7 +83,7 @@ namespace AlbumPhoto.Graphique
             // labelPictureName
             // 
             this.labelPictureName.AutoSize = true;
-            this.labelPictureName.Location = new System.Drawing.Point(440, 16);
+            this.labelPictureName.Location = new System.Drawing.Point(440, 18);
             this.labelPictureName.Name = "labelPictureName";
             this.labelPictureName.Size = new System.Drawing.Size(35, 13);
             this.labelPictureName.TabIndex = 6;
@@ -100,16 +100,16 @@ namespace AlbumPhoto.Graphique
             // 
             // trackBarZoom
             // 
-            this.trackBarZoom.Location = new System.Drawing.Point(402, 59);
+            this.trackBarZoom.Location = new System.Drawing.Point(395, 74);
             this.trackBarZoom.Name = "trackBarZoom";
-            this.trackBarZoom.Size = new System.Drawing.Size(253, 45);
+            this.trackBarZoom.Size = new System.Drawing.Size(260, 45);
             this.trackBarZoom.TabIndex = 9;
             this.trackBarZoom.Scroll += new System.EventHandler(this.trackBarZoom_Scroll);
             // 
             // labelAlbum
             // 
             this.labelAlbum.AutoSize = true;
-            this.labelAlbum.Location = new System.Drawing.Point(392, 37);
+            this.labelAlbum.Location = new System.Drawing.Point(392, 45);
             this.labelAlbum.Name = "labelAlbum";
             this.labelAlbum.Size = new System.Drawing.Size(42, 13);
             this.labelAlbum.TabIndex = 10;
@@ -118,7 +118,7 @@ namespace AlbumPhoto.Graphique
             // labelAlbumName
             // 
             this.labelAlbumName.AutoSize = true;
-            this.labelAlbumName.Location = new System.Drawing.Point(440, 37);
+            this.labelAlbumName.Location = new System.Drawing.Point(440, 45);
             this.labelAlbumName.Name = "labelAlbumName";
             this.labelAlbumName.Size = new System.Drawing.Size(35, 13);
             this.labelAlbumName.TabIndex = 11;

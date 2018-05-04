@@ -32,7 +32,6 @@ namespace AlbumPhoto
         public Photo getPhoto(string nom)
         {
             int index = getIndexPhoto(nom);
-            Console.WriteLine("On reçoit " + index);
             return listePhotos[index];
         }
 
@@ -40,23 +39,17 @@ namespace AlbumPhoto
         {
             if (listePhotos.Count == 0)
                 return -1;
-            Console.WriteLine("On cherche l'image : " + nomRecherche);
-            Console.WriteLine("Nombre de photos dans l'album : " + listePhotos.Count);
             int i = 0;
             int res = -1;
             while (i < listePhotos.Count)
             {
-                Console.WriteLine("i : " + i);
-                Console.WriteLine("nom de l'image au rang i : " + listePhotos[i].nom);
                 if (listePhotos[i].nom.Equals(nomRecherche))
                 {
-                    Console.WriteLine("trouvé");
                     res = i;
                     break;
                 }
                 i++;
             }
-            Console.WriteLine("On renvoit "+res);
             return res;
         }
 
@@ -82,7 +75,6 @@ namespace AlbumPhoto
         {
             if (this.containsPhoto(p.nom))
                 return;
-            Console.WriteLine("AJOUT DE L'IMAGE DANS LE MODELE : " + p.nom);
             listePhotos.Add(p);            
         }
 

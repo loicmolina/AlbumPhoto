@@ -2,8 +2,12 @@
 using AlbumPhoto.Outils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 
 namespace AlbumPhoto
@@ -39,8 +43,8 @@ namespace AlbumPhoto
         //booléen permettant de vérifier les chemins définis
         public bool PathFolderIsEmpty() { return path_folder.Equals("") || path_folder == null; }
 
-        public bool CurrentAlbumIsEmpty() { return current_album == null;  }
-        
+        public bool CurrentAlbumIsEmpty() { return current_album == null; }
+
 
 
         //Gestion d'Observer/Observable
@@ -57,7 +61,7 @@ namespace AlbumPhoto
                 o.UpdateAlbumsField();
             }
         }
-        
+
 
         //Méthodes de gestion des albums
 
@@ -69,7 +73,7 @@ namespace AlbumPhoto
         public Album GetAlbum(string nom)
         {
             int i = 0;
-            while(!listeAlbums[i].Equals(new Album(nom)))
+            while (!listeAlbums[i].Equals(new Album(nom)))
             {
                 i++;
             }
@@ -78,7 +82,7 @@ namespace AlbumPhoto
 
         public void CreateAlbum(String name)
         {
-            Directory.CreateDirectory(path_folder+ "\\"+name);
+            Directory.CreateDirectory(path_folder + "\\" + name);
             int i = 0;
             while (i < listeAlbums.Count && string.Compare(name, listeAlbums[i].nom) > -1) //placement correct dans l'ordre alphabétique
             {
@@ -91,8 +95,8 @@ namespace AlbumPhoto
         {
             Directory.Delete(path_folder + "\\" + name, true);
 
-            int i = 0;        
-            while (!listeAlbums[i].Equals(name))  { i++; }
+            int i = 0;
+            while (!listeAlbums[i].Equals(name)) { i++; }
 
             listeAlbums.RemoveAt(i);
         }
@@ -109,15 +113,18 @@ namespace AlbumPhoto
             }
         }
 
-
         //Méthodes gestions photos
 
-        public void UpdatePhotos(FileInfo[] Files)
+        public void UpdatePhotos(FileInfo[] Files,Album album)
         {
             foreach (FileInfo file in Files)
             {
-                if (!current_album.containsPhoto(file.ToString()) && Outils.Outils.Instance.IsCorrectType(file.ToString()))
-                    current_album.addPhoto(new Photo(file.ToString()));
+                if (!album.containsPhoto(file.ToString()) && Outils.Outils.Instance.IsCorrectType(file.ToString()))
+                {
+                    Photo p = new Photo(file.ToString());
+                    album.addPhoto(p);
+                    UpdateTags(file.FullName, p);
+                }
             }
         }
 
@@ -125,6 +132,28 @@ namespace AlbumPhoto
         {
             return this.GetAlbum(nomAlbum).getPhoto(nomPhoto);
         }
+
+
+        //Méthodes gestions tags
+        public void UpdateTags(string filename, Photo p)
+        {
+            using (Image img = Image.FromFile(filename))
+            {
+                PropertyItem pi = Outils.Outils.Instance.getPropertyItemByID(img, 40094);  //40094 = id des tags        
+                if (pi != null)
+                {
+                    Console.WriteLine(System.Text.Encoding.Unicode.GetString(pi.Value));
+                    List<string> listeTags = System.Text.Encoding.Unicode.GetString(pi.Value).Split(';').ToList();
+                    p.ClearTags();
+                    foreach (string s in listeTags)
+                    {
+                        Console.WriteLine("Ajout du TAG " + s);
+                        p.AddTag(s.Trim());
+                    }
+                }
+            }
+        }
+
 
         //Méthodes de recherches
 

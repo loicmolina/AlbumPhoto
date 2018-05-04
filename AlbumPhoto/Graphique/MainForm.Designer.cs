@@ -47,6 +47,7 @@ namespace ProjetAlbum
             this.listPictures = new System.Windows.Forms.ListView();
             this.textBoxRecherche = new System.Windows.Forms.TextBox();
             this.buttonRecherche = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,7 +80,7 @@ namespace ProjetAlbum
             this.fichierToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1504, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1499, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -95,14 +96,14 @@ namespace ProjetAlbum
             // localisationToolStripMenuItem
             // 
             this.localisationToolStripMenuItem.Name = "localisationToolStripMenuItem";
-            this.localisationToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.localisationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.localisationToolStripMenuItem.Text = "Localisation";
             this.localisationToolStripMenuItem.Click += new System.EventHandler(this.LocalisationToolStripMenuItem_Click);
             // 
             // quitterToolStripMenuItem
             // 
             this.quitterToolStripMenuItem.Name = "quitterToolStripMenuItem";
-            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.quitterToolStripMenuItem.Text = "Quitter";
             this.quitterToolStripMenuItem.Click += new System.EventHandler(this.QuitterToolStripMenuItem_Click);
             // 
@@ -168,8 +169,9 @@ namespace ProjetAlbum
             // listPictures
             // 
             this.listPictures.AllowDrop = true;
+            this.listPictures.BackColor = System.Drawing.SystemColors.HighlightText;
             this.listPictures.LargeImageList = this.listPhotos;
-            this.listPictures.Location = new System.Drawing.Point(158, 77);
+            this.listPictures.Location = new System.Drawing.Point(159, 77);
             this.listPictures.MaximumSize = new System.Drawing.Size(1336, 781);
             this.listPictures.Name = "listPictures";
             this.listPictures.Size = new System.Drawing.Size(1336, 781);
@@ -177,9 +179,9 @@ namespace ProjetAlbum
             this.listPictures.TabIndex = 7;
             this.listPictures.UseCompatibleStateImageBehavior = false;
             this.listPictures.SelectedIndexChanged += new System.EventHandler(this.ListPictures_SelectedIndexChanged);
-            this.listPictures.DragDrop += new System.Windows.Forms.DragEventHandler(this.listPictures_DragDrop);
-            this.listPictures.DragEnter += new System.Windows.Forms.DragEventHandler(this.listPictures_DragEnter);
-            this.listPictures.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listPictures_MouseDoubleClick);
+            this.listPictures.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListPictures_DragDrop);
+            this.listPictures.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListPictures_DragEnter);
+            this.listPictures.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListPictures_MouseDoubleClick);
             // 
             // textBoxRecherche
             // 
@@ -187,7 +189,7 @@ namespace ProjetAlbum
             this.textBoxRecherche.Name = "textBoxRecherche";
             this.textBoxRecherche.Size = new System.Drawing.Size(346, 20);
             this.textBoxRecherche.TabIndex = 16;
-            this.textBoxRecherche.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxRecherche_KeyDown);
+            this.textBoxRecherche.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxRecherche_KeyDown);
             // 
             // buttonRecherche
             // 
@@ -197,13 +199,23 @@ namespace ProjetAlbum
             this.buttonRecherche.TabIndex = 17;
             this.buttonRecherche.Text = "Rechercher";
             this.buttonRecherche.UseVisualStyleBackColor = true;
-            this.buttonRecherche.Click += new System.EventHandler(this.buttonRecherche_Click);
+            this.buttonRecherche.Click += new System.EventHandler(this.ButtonRecherche_Click);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.progressBar.Location = new System.Drawing.Point(3, 835);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(149, 23);
+            this.progressBar.TabIndex = 18;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1504, 861);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(1499, 861);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.buttonRecherche);
             this.Controls.Add(this.textBoxRecherche);
             this.Controls.Add(this.button1);
@@ -242,6 +254,7 @@ namespace ProjetAlbum
         private System.Windows.Forms.ListView listPictures;
         private TextBox textBoxRecherche;
         private Button buttonRecherche;
+        private ProgressBar progressBar;
     }
 }
 

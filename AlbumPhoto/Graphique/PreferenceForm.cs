@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,27 @@ namespace AlbumPhoto
             if (!textBox_folder_path.Text.Equals(""))
             {
                 this.Hide();
+
+                //vide anciens albums
                 donnees.cleanListeAlbums();
+
+                //récupère dans le modèle les nouveaux albums
+                string[] folders = System.IO.Directory.GetDirectories(donnees.path_folder, "*", System.IO.SearchOption.TopDirectoryOnly);
+                donnees.UpdateAlbums(folders);
+
+                foreach(string album in folders)
+                {
+                    Console.WriteLine(album);
+                    DirectoryInfo dinfo = new DirectoryInfo(album);
+                    FileInfo[] Files = dinfo.GetFiles();
+                    donnees.UpdatePhotos(Files, donnees.GetAlbum(Outils.Outils.Instance.getName(album)));
+
+                    
+
+                }
+                
+
+
                 donnees.NotifyObservers();
             }
         }

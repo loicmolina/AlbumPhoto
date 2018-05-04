@@ -104,13 +104,13 @@ namespace ProjetAlbum
             ListView.SelectedIndexCollection indexes = listPictures.SelectedIndices;
             for (int i = indexes.Count - 1; i >= 0; i--)
             {
-                Console.WriteLine("Supression du fichier : " + donnees.path_folder + "\\" + donnees.current_album + "\\" + donnees.current_album.getPhoto(indexes[i]).nom);
+                //Console.WriteLine("Supression du fichier : " + donnees.path_folder + "\\" + donnees.current_album + "\\" + donnees.current_album.getPhoto(indexes[i]).nom);
                 File.Delete(donnees.path_folder+"\\"+donnees.current_album+"\\"+donnees.current_album.getPhoto(indexes[i]).nom);
 
-                Console.WriteLine("Supression dans la vue de la " + indexes[i]+ "eme image");
+                //Console.WriteLine("Supression dans la vue de la " + indexes[i]+ "eme image");
                 listPhotos.Images.RemoveAt(indexes[i]);
 
-                Console.WriteLine("Supression dans le modèle de : " + donnees.current_album.listePhotos[indexes[i]]);
+                //Console.WriteLine("Supression dans le modèle de : " + donnees.current_album.listePhotos[indexes[i]]);
                 donnees.current_album.listePhotos.RemoveAt(indexes[i]);
             }
 
@@ -118,7 +118,12 @@ namespace ProjetAlbum
             RefreshListView();
         }
 
-
+        private void ButtonRecherche_Click(object sender, EventArgs e)
+        {
+            buttonDelAlbum.Enabled = true;
+            EffectuerRecherche();
+        }
+        
         private void Button1_Click(object sender, EventArgs e)
         {
             if (listAlbums != null)
@@ -141,7 +146,6 @@ namespace ProjetAlbum
                 }
             }
         }
-
 
         private void QuitterToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -168,7 +172,7 @@ namespace ProjetAlbum
                 DirectoryInfo dinfo = new DirectoryInfo(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString());
                 FileInfo[] Files = dinfo.GetFiles();
                 donnees.current_album = donnees.listeAlbums[listAlbums.SelectedIndex];
-                donnees.UpdatePhotos(Files);
+                donnees.UpdatePhotos(Files, donnees.current_album);
 
                 RefreshImageList();             
                 RefreshListView(); 
@@ -223,6 +227,7 @@ namespace ProjetAlbum
             }
             //Console.WriteLine("AJOUT DE L'IMAGE DANS LE MODELE : " + nom);
             donnees.current_album.addPhoto(new Photo(nom), i);
+            donnees.UpdateTags(donnees.path_folder + "//" + donnees.current_album.nom + "//" + nom, donnees.current_album.listePhotos[i]);
         }
 
 
@@ -238,15 +243,22 @@ namespace ProjetAlbum
         public void RefreshImageList()
         {
             DisposeAllPhotosForm();
+
+            progressBar.Maximum = donnees.current_album.listePhotos.Count;
+            progressBar.Value = progressBar.Minimum;
             foreach (Photo p in donnees.current_album.listePhotos)
             {
                 try
                 {
                     if (Outils.Instance.IsCorrectType(p.nom))
+                    {
                         AjoutDansListePhotosForm(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + p.nom);
+                        progressBar.Value += 1;
+                    }
                 }
                 catch { }
             }
+            progressBar.Value = progressBar.Maximum;
         }
 
         public void RefreshListView()
@@ -298,7 +310,7 @@ namespace ProjetAlbum
 
         //Gestion du Drag&Drop
 
-        private void listPictures_DragDrop(object sender, DragEventArgs e)
+        private void ListPictures_DragDrop(object sender, DragEventArgs e)
         {
             if (donnees.CurrentAlbumIsEmpty())
                 return;
@@ -311,14 +323,14 @@ namespace ProjetAlbum
             RefreshImagesForm();
         }
 
-        private void listPictures_DragEnter(object sender, DragEventArgs e)
+        private void ListPictures_DragEnter(object sender, DragEventArgs e)
         {
             if (donnees.CurrentAlbumIsEmpty())
                 return;
             e.Effect = DragDropEffects.Copy;
         }
 
-        private void listPictures_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void ListPictures_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (listPictures.SelectedIndices.Count != 1 && listPhotos.Images.Count<=0)
                 return;
@@ -331,19 +343,9 @@ namespace ProjetAlbum
             else
             {
                 Album album = donnees.GetAlbum( donnees.listeResultats[listPictures.SelectedIndices[0]][0] );
-
-                Console.WriteLine(donnees.listeResultats[listPictures.SelectedIndices[0]][1]);
-
                 Photo photo = donnees.getPhoto( album.nom , donnees.listeResultats[listPictures.SelectedIndices[0]][1] );
-
-
-                Console.WriteLine("ALBUM :" +album.nom);
-                Console.WriteLine("PHOTO :" +photo.nom);
-
                 dpf = new DetailPhotoForm(album , photo, donnees);
             }
-
-            Console.WriteLine("Ouverture de l'image numéro "+listPictures.SelectedIndices[0]);
             dpf.Show();
             
         }
@@ -372,13 +374,7 @@ namespace ProjetAlbum
             RefreshListView();
         }
 
-        private void buttonRecherche_Click(object sender, EventArgs e)
-        {
-            buttonDelAlbum.Enabled = true;
-            EffectuerRecherche();
-        }
-
-        private void textBoxRecherche_KeyDown(object sender, KeyEventArgs e)
+        private void TextBoxRecherche_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
             {
