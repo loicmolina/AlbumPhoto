@@ -48,11 +48,13 @@ namespace ProjetAlbum
             this.textBoxRecherche = new System.Windows.Forms.TextBox();
             this.buttonRecherche = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.comboBoxAlbums = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listAlbums
             // 
+            this.listAlbums.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.listAlbums.FormattingEnabled = true;
             this.listAlbums.Location = new System.Drawing.Point(3, 77);
             this.listAlbums.Name = "listAlbums";
@@ -75,6 +77,7 @@ namespace ProjetAlbum
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fichierToolStripMenuItem});
@@ -96,14 +99,14 @@ namespace ProjetAlbum
             // localisationToolStripMenuItem
             // 
             this.localisationToolStripMenuItem.Name = "localisationToolStripMenuItem";
-            this.localisationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.localisationToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.localisationToolStripMenuItem.Text = "Localisation";
             this.localisationToolStripMenuItem.Click += new System.EventHandler(this.LocalisationToolStripMenuItem_Click);
             // 
             // quitterToolStripMenuItem
             // 
             this.quitterToolStripMenuItem.Name = "quitterToolStripMenuItem";
-            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.quitterToolStripMenuItem.Text = "Quitter";
             this.quitterToolStripMenuItem.Click += new System.EventHandler(this.QuitterToolStripMenuItem_Click);
             // 
@@ -169,7 +172,7 @@ namespace ProjetAlbum
             // listPictures
             // 
             this.listPictures.AllowDrop = true;
-            this.listPictures.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.listPictures.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.listPictures.LargeImageList = this.listPhotos;
             this.listPictures.Location = new System.Drawing.Point(159, 77);
             this.listPictures.MaximumSize = new System.Drawing.Size(1336, 781);
@@ -185,6 +188,7 @@ namespace ProjetAlbum
             // 
             // textBoxRecherche
             // 
+            this.textBoxRecherche.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxRecherche.Location = new System.Drawing.Point(1073, 49);
             this.textBoxRecherche.Name = "textBoxRecherche";
             this.textBoxRecherche.Size = new System.Drawing.Size(346, 20);
@@ -193,7 +197,8 @@ namespace ProjetAlbum
             // 
             // buttonRecherche
             // 
-            this.buttonRecherche.Location = new System.Drawing.Point(1419, 48);
+            this.buttonRecherche.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRecherche.Location = new System.Drawing.Point(1420, 49);
             this.buttonRecherche.Name = "buttonRecherche";
             this.buttonRecherche.Size = new System.Drawing.Size(75, 22);
             this.buttonRecherche.TabIndex = 17;
@@ -209,12 +214,24 @@ namespace ProjetAlbum
             this.progressBar.Size = new System.Drawing.Size(149, 23);
             this.progressBar.TabIndex = 18;
             // 
+            // comboBoxAlbums
+            // 
+            this.comboBoxAlbums.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAlbums.FormattingEnabled = true;
+            this.comboBoxAlbums.Items.AddRange(new object[] {
+            "Tous"});
+            this.comboBoxAlbums.Location = new System.Drawing.Point(960, 49);
+            this.comboBoxAlbums.Name = "comboBoxAlbums";
+            this.comboBoxAlbums.Size = new System.Drawing.Size(107, 21);
+            this.comboBoxAlbums.TabIndex = 19;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.ClientSize = new System.Drawing.Size(1499, 861);
+            this.Controls.Add(this.comboBoxAlbums);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.buttonRecherche);
             this.Controls.Add(this.textBoxRecherche);
@@ -227,10 +244,12 @@ namespace ProjetAlbum
             this.Controls.Add(this.buttonNewAlbum);
             this.Controls.Add(this.listAlbums);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Text = "Gestion d\'albums photo";
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -255,6 +274,6 @@ namespace ProjetAlbum
         private TextBox textBoxRecherche;
         private Button buttonRecherche;
         private ProgressBar progressBar;
+        private ComboBox comboBoxAlbums;
     }
 }
-

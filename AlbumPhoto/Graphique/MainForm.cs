@@ -94,6 +94,13 @@ namespace ProjetAlbum
             listAlbums.Items.RemoveAt(listAlbums.SelectedIndex); //suppression de l'album de la liste (Form)
             
             UpdateAlbumsField();
+
+            if (listAlbums.SelectedIndex == -1)
+            {
+                buttonDelImage.Enabled = false;
+                buttonImportPhoto.Enabled = false;
+                buttonDelAlbum.Enabled = false;
+            }
         }
 
         private void ButtonDelImage_Click(object sender, EventArgs e)
@@ -145,6 +152,7 @@ namespace ProjetAlbum
                         Console.WriteLine(p.nom);
                 }
             }
+            Console.WriteLine("affichae domaine :" + comboBoxAlbums.SelectedValue);
         }
 
         private void QuitterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -302,10 +310,17 @@ namespace ProjetAlbum
 
             //affichage
             listAlbums.Items.Clear();
+            comboBoxAlbums.Items.Clear();
+            comboBoxAlbums.Items.Add("Tous");
+            comboBoxAlbums.SelectedIndex = 0;
+
             foreach (string folderpath in folders)
             {
-                listAlbums.Items.Add(Outils.Instance.getName(folderpath));
+                string album = Outils.Instance.getName(folderpath);
+                listAlbums.Items.Add(album);
+                comboBoxAlbums.Items.Add(album);                
             }
+            
         }
 
         //Gestion du Drag&Drop
@@ -352,13 +367,13 @@ namespace ProjetAlbum
 
         public void EffectuerRecherche()
         {
-            if (textBoxRecherche.Text == "")
+            if (textBoxRecherche.Text == "" || comboBoxAlbums.Text=="")
                 return;
 
             List<string> ListeMotsCles = textBoxRecherche.Text.Split(',').ToList();
             Outils.Instance.TrimList(ListeMotsCles);
-
-            donnees.ChercherResultats(ListeMotsCles);
+            
+            donnees.ChercherResultats(ListeMotsCles, comboBoxAlbums.Text);
 
             //Deselectionne Album
             listAlbums.SelectedIndex = -1;
@@ -381,5 +396,11 @@ namespace ProjetAlbum
                 EffectuerRecherche();
             }
         }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            listPictures.Width = this.Width - (listAlbums.Width + 10);
+        }
+        
     }
 }

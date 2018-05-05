@@ -55,7 +55,6 @@ namespace AlbumPhoto.Outils
             Bitmap squareImage = new Bitmap(squareSize.Width, squareSize.Height);
             using (Graphics graphics = Graphics.FromImage(squareImage))
             {
-                graphics.FillRectangle(Brushes.White, 0, 0, squareSize.Width, squareSize.Height);
                 graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
                 graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;

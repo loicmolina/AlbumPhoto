@@ -16,7 +16,6 @@ namespace AlbumPhoto
     {
         protected List<Observer> listeObservers;
         public List<Album> listeAlbums { get; }
-        public List<string> listeLocalisations { get; }
         public List<string[]> listeResultats { get; }
         public String path_folder { get; set; }
         public Album current_album { get; set; }
@@ -28,7 +27,6 @@ namespace AlbumPhoto
         {
             listeObservers = new List<Observer>();
             listeAlbums = new List<Album>();
-            listeLocalisations = new List<string>();
             listeResultats = new List<string[]>();
             path_folder = "";
         }
@@ -54,10 +52,11 @@ namespace AlbumPhoto
             listeObservers.Add(obs);
         }
 
-        public void NotifyObservers()
+        public void NotifierVue()
         {
             foreach (Observer o in listeObservers)
             {
+                o.DisposeAllPhotosForm();
                 o.UpdateAlbumsField();
             }
         }
@@ -103,12 +102,12 @@ namespace AlbumPhoto
 
         public void UpdateAlbums(string[] folders)
         {
-            if (!listeLocalisations.Contains(path_folder))
+            foreach (string folder in folders)
             {
-                listeLocalisations.Add(path_folder);
-                foreach (string folder in folders)
+                Album album = new Album(Outils.Outils.Instance.getName(folder));
+                if (!listeAlbums.Contains(album))
                 {
-                    listeAlbums.Add(new Album(Outils.Outils.Instance.getName(folder)));
+                    listeAlbums.Add(album);
                 }
             }
         }
@@ -142,12 +141,10 @@ namespace AlbumPhoto
                 PropertyItem pi = Outils.Outils.Instance.getPropertyItemByID(img, 40094);  //40094 = id des tags        
                 if (pi != null)
                 {
-                    Console.WriteLine(System.Text.Encoding.Unicode.GetString(pi.Value));
                     List<string> listeTags = System.Text.Encoding.Unicode.GetString(pi.Value).Split(';').ToList();
                     p.ClearTags();
                     foreach (string s in listeTags)
                     {
-                        Console.WriteLine("Ajout du TAG " + s);
                         p.AddTag(s.Trim());
                     }
                 }
@@ -157,24 +154,42 @@ namespace AlbumPhoto
 
         //Méthodes de recherches
 
-        public void ChercherResultats(List<string> motscles)
+        public void ChercherResultats(List<string> motscles, string domaine)
         {
             listeResultats.Clear();
             current_album = null;
 
-            foreach (Album a in listeAlbums)
+            if (domaine.Equals("Tous"))
             {
-                foreach(Photo p in a.listePhotos)
+                foreach (Album album in listeAlbums)
                 {
-                    if (!motscles.Except(p.tags).Any() == true)
+                    foreach (Photo photo in album.listePhotos)
                     {
-                        string[] res = new string[2];
-                        res[0] = a.nom;
-                        res[1] = p.nom;
-                        listeResultats.Add(res);
-                    }       
+                        if (!motscles.Except(photo.tags).Any() == true)
+                        {
+                            string[] res = new string[2];
+                            res[0] = album.nom;
+                            res[1] = photo.nom;
+                            listeResultats.Add(res);
+                        }
+                    }
                 }
             }
+            else
+            {
+                Album album = this.GetAlbum(domaine);
+                foreach (Photo photo in album.listePhotos)
+                {
+                    if (!motscles.Except(photo.tags).Any() == true)
+                    {
+                        string[] res = new string[2];
+                        res[0] = album.nom;
+                        res[1] = photo.nom;
+                        listeResultats.Add(res);
+                    }
+                }
+            }
+            
         }        
     }
 }

@@ -54,18 +54,12 @@ namespace AlbumPhoto
 
                 foreach(string album in folders)
                 {
-                    Console.WriteLine(album);
                     DirectoryInfo dinfo = new DirectoryInfo(album);
                     FileInfo[] Files = dinfo.GetFiles();
-                    donnees.UpdatePhotos(Files, donnees.GetAlbum(Outils.Outils.Instance.getName(album)));
-
-                    
-
+                    donnees.UpdatePhotos(Files, donnees.GetAlbum(Outils.Outils.Instance.getName(album))); 
                 }
-                
-
-
-                donnees.NotifyObservers();
+               
+                donnees.NotifierVue();
             }
         }
 

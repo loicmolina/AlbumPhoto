@@ -9,5 +9,7 @@ namespace AlbumPhoto.Obs
     public interface Observer
     {
         void UpdateAlbumsField();
+
+        void DisposeAllPhotosForm();
     }
 }
