@@ -91,7 +91,70 @@ namespace AlbumPhoto.Graphique
             {
                 image.Image = Zoom(originalImage, new Size(trackBarZoom.Value, trackBarZoom.Value));
             }
+        }
 
+        private void PhotoMouseWheel(object sender, MouseEventArgs e)
+        {
+            int tailleDuZoomX = image.Image.Width / 2;
+            int tailleDuZoomY = image.Image.Height / 2;
+
+            Console.WriteLine(image.Image.Width + "/" + image.Image.Height);
+
+            double rapportX = (double)image.Image.Width / image.Width;
+            double rapportY = (double)image.Image.Height / image.Height;
+
+            // POSITION X
+            int positionX = (int)(e.Location.X * rapportX);
+
+            int positionXmin = positionX - (tailleDuZoomX / 2);
+            int positionXmax = positionX + (tailleDuZoomX / 2);
+
+            if (positionXmin < 0)
+            {
+                positionXmin = 0;
+                positionXmax = tailleDuZoomX;
+            }
+
+            if (positionXmax > image.Image.Width)
+            {
+                positionXmax = image.Image.Width;
+                positionXmin = image.Image.Width - tailleDuZoomX;
+            }
+
+            // POSITION Y
+            int positionY = (int)(e.Location.Y * rapportY);
+
+            int positionYmin = positionY - (tailleDuZoomY / 2);
+            int positionYmax = positionY + (tailleDuZoomY / 2);
+
+            if (positionYmin < 0)
+            {
+                positionYmin = 0;
+                positionYmax = tailleDuZoomY;
+            }
+
+            if (positionYmax > image.Image.Height)
+            {
+                positionYmax = image.Image.Height;
+                positionYmin = image.Image.Height - tailleDuZoomY;
+            }
+
+            if (positionXmin >= 0 && positionYmin >= 0 && positionXmax <= image.Image.Width && positionYmax <= image.Image.Height)
+            {
+                Bitmap bmp = new Bitmap(image.Image);
+                Graphics g = Graphics.FromImage(bmp);
+
+                if (e.Delta > 0)
+                {
+                    g.DrawImage(image.Image, new Rectangle(0, 0, bmp.Width, bmp.Height), new Rectangle(positionXmin, positionYmin, positionXmax - positionXmin, positionYmax - positionYmin), GraphicsUnit.Pixel);
+                }
+                else
+                {
+                    g.DrawImage(originalImage, new Rectangle(0, 0, originalImage.Width, originalImage.Height));
+                }
+
+                image.Image = Outils.Outils.Instance.copyImage(bmp);
+            }
         }
 
         private Image Zoom(Image img, Size size)

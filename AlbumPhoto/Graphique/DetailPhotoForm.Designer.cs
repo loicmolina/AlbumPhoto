@@ -97,6 +97,7 @@ namespace AlbumPhoto.Graphique
             this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.image.TabIndex = 7;
             this.image.TabStop = false;
+            this.image.MouseWheel += new MouseEventHandler(this.PhotoMouseWheel);
             // 
             // trackBarZoom
             // 
