@@ -32,7 +32,9 @@ namespace AlbumPhoto.Graphique
             using(Image img = Image.FromFile(donnees.path_folder + "//" + album.nom + "//" + photo.nom))
             {
                 image.Image = Outils.Outils.Instance.copyImage(img) ;
-                foreach(PropertyItem prop in img.PropertyItems)
+                originalImage = Outils.Outils.Instance.copyImage(img);
+
+                foreach (PropertyItem prop in img.PropertyItems)
                 {
                     image.Image.SetPropertyItem(prop);
                 }
@@ -85,20 +87,13 @@ namespace AlbumPhoto.Graphique
             this.Close();
         }
 
-        private void trackBarZoom_Scroll(object sender, EventArgs e)
-        {
-            if (trackBarZoom.Value > 0)
-            {
-                image.Image = Zoom(originalImage, new Size(trackBarZoom.Value, trackBarZoom.Value));
-            }
-        }
 
         private void PhotoMouseWheel(object sender, MouseEventArgs e)
         {
             int tailleDuZoomX = image.Image.Width / 2;
             int tailleDuZoomY = image.Image.Height / 2;
 
-            Console.WriteLine(image.Image.Width + "/" + image.Image.Height);
+            //Console.WriteLine(image.Image.Width + "/" + image.Image.Height);
 
             double rapportX = (double)image.Image.Width / image.Width;
             double rapportY = (double)image.Image.Height / image.Height;
@@ -171,6 +166,7 @@ namespace AlbumPhoto.Graphique
                 image.Dispose();
             if (originalImage != null)
                 originalImage.Dispose();
+            GC.Collect();
         }
 
     }

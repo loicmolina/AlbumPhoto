@@ -36,11 +36,9 @@ namespace AlbumPhoto.Graphique
             this.labeTags = new System.Windows.Forms.Label();
             this.labelPictureName = new System.Windows.Forms.Label();
             this.image = new System.Windows.Forms.PictureBox();
-            this.trackBarZoom = new System.Windows.Forms.TrackBar();
             this.labelAlbum = new System.Windows.Forms.Label();
             this.labelAlbumName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).BeginInit();
             this.SuspendLayout();
             // 
             // labelName
@@ -65,16 +63,16 @@ namespace AlbumPhoto.Graphique
             // textBoxTags
             // 
             this.textBoxTags.AcceptsReturn = true;
-            this.textBoxTags.Location = new System.Drawing.Point(444, 123);
+            this.textBoxTags.Location = new System.Drawing.Point(444, 83);
             this.textBoxTags.Multiline = true;
             this.textBoxTags.Name = "textBoxTags";
-            this.textBoxTags.Size = new System.Drawing.Size(212, 220);
+            this.textBoxTags.Size = new System.Drawing.Size(212, 260);
             this.textBoxTags.TabIndex = 5;
             // 
             // labeTags
             // 
             this.labeTags.AutoSize = true;
-            this.labeTags.Location = new System.Drawing.Point(397, 126);
+            this.labeTags.Location = new System.Drawing.Point(397, 83);
             this.labeTags.Name = "labeTags";
             this.labeTags.Size = new System.Drawing.Size(37, 13);
             this.labeTags.TabIndex = 4;
@@ -97,15 +95,7 @@ namespace AlbumPhoto.Graphique
             this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.image.TabIndex = 7;
             this.image.TabStop = false;
-            this.image.MouseWheel += new MouseEventHandler(this.PhotoMouseWheel);
-            // 
-            // trackBarZoom
-            // 
-            this.trackBarZoom.Location = new System.Drawing.Point(395, 74);
-            this.trackBarZoom.Name = "trackBarZoom";
-            this.trackBarZoom.Size = new System.Drawing.Size(260, 45);
-            this.trackBarZoom.TabIndex = 9;
-            this.trackBarZoom.Scroll += new System.EventHandler(this.trackBarZoom_Scroll);
+            this.image.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.PhotoMouseWheel);
             // 
             // labelAlbum
             // 
@@ -140,13 +130,11 @@ namespace AlbumPhoto.Graphique
             this.Controls.Add(this.labeTags);
             this.Controls.Add(this.registerButton);
             this.Controls.Add(this.labelName);
-            this.Controls.Add(this.trackBarZoom);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "DetailPhotoForm";
             this.Text = "DetailPhotoForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DetailPhotoForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarZoom)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,7 +147,6 @@ namespace AlbumPhoto.Graphique
         private System.Windows.Forms.Label labeTags;
         private System.Windows.Forms.Label labelPictureName;
         private PictureBox image;
-        private TrackBar trackBarZoom;
         private Label labelAlbum;
         private Label labelAlbumName;
     }

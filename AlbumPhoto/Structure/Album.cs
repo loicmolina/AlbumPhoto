@@ -85,11 +85,10 @@ namespace AlbumPhoto
             listePhotos.Insert(index, p);            
         }
 
-        public void delPhoto(string name, string path)
+        public void delPhoto(string nomP)
         {
-            File.Delete(path+"//"+name);
             int i = 0;
-            while (!listePhotos[i].Equals(name))
+            while (!listePhotos[i].nom.Equals(nomP))
             {
                 i++;
             }

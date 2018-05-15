@@ -184,6 +184,7 @@ namespace ProjetAlbum
             this.listPictures.SelectedIndexChanged += new System.EventHandler(this.ListPictures_SelectedIndexChanged);
             this.listPictures.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListPictures_DragDrop);
             this.listPictures.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListPictures_DragEnter);
+            this.listPictures.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listPictures_KeyDown);
             this.listPictures.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListPictures_MouseDoubleClick);
             // 
             // textBoxRecherche
@@ -216,6 +217,7 @@ namespace ProjetAlbum
             // 
             // comboBoxAlbums
             // 
+            this.comboBoxAlbums.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxAlbums.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAlbums.FormattingEnabled = true;
             this.comboBoxAlbums.Items.AddRange(new object[] {
