@@ -38,6 +38,8 @@ namespace ProjetAlbum
             this.fichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.localisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestionDesSuperTagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listPhotos = new System.Windows.Forms.ImageList(this.components);
             this.nameNewAlbum = new System.Windows.Forms.TextBox();
             this.buttonImportPhoto = new System.Windows.Forms.Button();
@@ -49,6 +51,7 @@ namespace ProjetAlbum
             this.buttonRecherche = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.comboBoxAlbums = new System.Windows.Forms.ComboBox();
+            this.comboBoxZone = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +83,8 @@ namespace ProjetAlbum
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fichierToolStripMenuItem});
+            this.fichierToolStripMenuItem,
+            this.editionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1499, 24);
@@ -109,6 +113,21 @@ namespace ProjetAlbum
             this.quitterToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.quitterToolStripMenuItem.Text = "Quitter";
             this.quitterToolStripMenuItem.Click += new System.EventHandler(this.QuitterToolStripMenuItem_Click);
+            // 
+            // editionToolStripMenuItem
+            // 
+            this.editionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gestionDesSuperTagsToolStripMenuItem});
+            this.editionToolStripMenuItem.Name = "editionToolStripMenuItem";
+            this.editionToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.editionToolStripMenuItem.Text = "Edition";
+            // 
+            // gestionDesSuperTagsToolStripMenuItem
+            // 
+            this.gestionDesSuperTagsToolStripMenuItem.Name = "gestionDesSuperTagsToolStripMenuItem";
+            this.gestionDesSuperTagsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.gestionDesSuperTagsToolStripMenuItem.Text = "Gestion des super tags";
+            this.gestionDesSuperTagsToolStripMenuItem.Click += new System.EventHandler(this.gestionDesSuperTagsToolStripMenuItem_Click);
             // 
             // listPhotos
             // 
@@ -171,8 +190,10 @@ namespace ProjetAlbum
             // 
             // listPictures
             // 
+            this.listPictures.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.listPictures.AllowDrop = true;
             this.listPictures.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.listPictures.HoverSelection = true;
             this.listPictures.LargeImageList = this.listPhotos;
             this.listPictures.Location = new System.Drawing.Point(159, 77);
             this.listPictures.MaximumSize = new System.Drawing.Size(1336, 781);
@@ -227,12 +248,26 @@ namespace ProjetAlbum
             this.comboBoxAlbums.Size = new System.Drawing.Size(107, 21);
             this.comboBoxAlbums.TabIndex = 19;
             // 
+            // comboBoxZone
+            // 
+            this.comboBoxZone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxZone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxZone.FormattingEnabled = true;
+            this.comboBoxZone.Items.AddRange(new object[] {
+            "Union",
+            "Inter"});
+            this.comboBoxZone.Location = new System.Drawing.Point(880, 49);
+            this.comboBoxZone.Name = "comboBoxZone";
+            this.comboBoxZone.Size = new System.Drawing.Size(70, 21);
+            this.comboBoxZone.TabIndex = 20;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.ClientSize = new System.Drawing.Size(1499, 861);
+            this.Controls.Add(this.comboBoxZone);
             this.Controls.Add(this.comboBoxAlbums);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.buttonRecherche);
@@ -246,6 +281,7 @@ namespace ProjetAlbum
             this.Controls.Add(this.buttonNewAlbum);
             this.Controls.Add(this.listAlbums);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
@@ -277,5 +313,8 @@ namespace ProjetAlbum
         private Button buttonRecherche;
         private ProgressBar progressBar;
         private ComboBox comboBoxAlbums;
+        private ToolStripMenuItem editionToolStripMenuItem;
+        private ToolStripMenuItem gestionDesSuperTagsToolStripMenuItem;
+        private ComboBox comboBoxZone;
     }
 }

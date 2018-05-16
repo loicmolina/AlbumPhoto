@@ -47,3 +47,4 @@ C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.Pr
 C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\bin\Debug\MySql.Data.dll
 C:\Users\Proprietaire\source\repos\AlbumPhoto\AlbumPhoto\bin\Debug\MySql.Data.xml
 D:\Projets\AlbumPhoto\AlbumPhoto\bin\Debug\MySql.Data.xml
+D:\Projets\AlbumPhoto\AlbumPhoto\obj\Debug\AlbumPhoto.Graphique.SuperTagsForm.resources

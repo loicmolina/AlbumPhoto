@@ -1,5 +1,6 @@
 ﻿using AlbumPhoto.Obs;
 using AlbumPhoto.Outils;
+using AlbumPhoto.Structure;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -17,6 +18,7 @@ namespace AlbumPhoto
         protected List<Observer> listeObservers;
         public List<Album> listeAlbums { get; }
         public List<string[]> listeResultats { get; }
+        public List<SuperTag> listeSuperTags { get; }
         public String path_folder { get; set; }
         public Album current_album { get; set; }
 
@@ -28,6 +30,7 @@ namespace AlbumPhoto
             listeObservers = new List<Observer>();
             listeAlbums = new List<Album>();
             listeResultats = new List<string[]>();
+            listeSuperTags = new List<SuperTag>();
             path_folder = "";
         }
 
@@ -59,6 +62,21 @@ namespace AlbumPhoto
                 o.DisposeAllPhotosForm();
                 o.UpdateAlbumsField();
             }
+        }
+
+        //Methodes de gestion de la hiérarchie des tags
+        public SuperTag getSuperTag(string nom)
+        {
+            int i = 0;
+            while (i < listeSuperTags.Count - 1 && !listeSuperTags[0].nomSuperTag.Equals(nom))
+                i++;
+            return listeSuperTags[i];
+        }
+
+        public void addSuperTag(SuperTag st)
+        {
+            if(!listeSuperTags.Contains(st))
+                listeSuperTags.Add(st);
         }
 
 
@@ -154,10 +172,28 @@ namespace AlbumPhoto
 
         //Méthodes de recherches
 
-        public void ChercherResultats(List<string> motscles, string domaine)
+        public void ChercherResultats(List<string> motscles, string domaine, string zone)
         {
+
             listeResultats.Clear();
             current_album = null;
+
+            List<string> newtags = new List<string>();
+            
+            foreach (SuperTag st in listeSuperTags)
+            {
+                if (motscles.Contains(st.nomSuperTag))
+                {
+                    newtags.AddRange(st.ListeSousTags);
+                }
+            }
+
+            newtags.AddRange(motscles);
+            foreach(string s in newtags)
+            {
+                Console.WriteLine(s);
+            }
+
 
             if (domaine.Equals("Tous"))
             {
@@ -165,7 +201,7 @@ namespace AlbumPhoto
                 {
                     foreach (Photo photo in album.listePhotos)
                     {
-                        if (!motscles.Except(photo.tags).Any() == true)
+                        if (verification(photo, newtags, zone))
                         {
                             string[] res = new string[2];
                             res[0] = album.nom;
@@ -180,7 +216,7 @@ namespace AlbumPhoto
                 Album album = this.GetAlbum(domaine);
                 foreach (Photo photo in album.listePhotos)
                 {
-                    if (!motscles.Except(photo.tags).Any() == true)
+                    if (verification(photo,newtags,zone))
                     {
                         string[] res = new string[2];
                         res[0] = album.nom;
@@ -190,6 +226,18 @@ namespace AlbumPhoto
                 }
             }
             
-        }        
+        }  
+        
+        public bool verification(Photo p,List<string> tags,string zone)
+        {
+            if (zone.Equals("Union")){
+                return p.tags.Any(x => tags.Contains(x)) == true;
+            }
+            else
+            {
+                return !tags.Except(p.tags).Any() == true;
+            }
+
+        }
     }
 }

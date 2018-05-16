@@ -15,6 +15,7 @@ namespace ProjetAlbum
     {
         protected OpenFileDialog openFileDialog;
         protected FolderBrowserDialog folderBrowserDialog;
+        protected SuperTagsForm stf;
         protected PreferenceForm pf;
         protected Donnees donnees;       
 
@@ -152,6 +153,17 @@ namespace ProjetAlbum
             pf.Show();
         }
 
+
+        private void gestionDesSuperTagsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (stf != null)
+            {
+                stf.Dispose();
+            }
+            stf = new SuperTagsForm(donnees);
+            stf.Show();
+        }
+
         //Gestions des Widgets à index 
 
 
@@ -193,14 +205,16 @@ namespace ProjetAlbum
 
         public void AjoutDansListePhotosForm(string img_fullname)
         {
-            using(Image image = Image.FromFile(img_fullname))
+            
+            using (Image image = Image.FromFile(img_fullname))
             {
+
                 //Console.WriteLine("AJOUT DE L'IMAGE DANS LA VUE : " + img_fullname);
                 ListViewItem newItem = new ListViewItem();
                 newItem.ImageIndex = listPhotos.Images.Count;
                 listPictures.Items.Add(newItem);
-                listPhotos.Images.Add(Outils.Instance.getName(img_fullname),Outils.Instance.squareImage(image));
-                
+                listPhotos.Images.Add(Outils.Instance.getName(img_fullname), Outils.Instance.squareImage(image));
+
             }  
         }
 
@@ -390,7 +404,7 @@ namespace ProjetAlbum
             List<string> ListeMotsCles = textBoxRecherche.Text.Split(',').ToList();
             Outils.Instance.TrimList(ListeMotsCles);
             
-            donnees.ChercherResultats(ListeMotsCles, comboBoxAlbums.Text);
+            donnees.ChercherResultats(ListeMotsCles, comboBoxAlbums.Text, comboBoxZone.Text);
 
             //Deselectionne Album
             listAlbums.SelectedIndex = -1;
@@ -425,5 +439,6 @@ namespace ProjetAlbum
                 SupprimerPhoto();
             }
         }
+
     }
 }
