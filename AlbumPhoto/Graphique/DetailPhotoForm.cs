@@ -32,7 +32,9 @@ namespace AlbumPhoto.Graphique
             using(Image img = Image.FromFile(donnees.path_folder + "//" + album.nom + "//" + photo.nom))
             {
                 image.Image = Outils.Outils.Instance.copyImage(img) ;
-                foreach(PropertyItem prop in img.PropertyItems)
+                originalImage = Outils.Outils.Instance.copyImage(img);
+
+                foreach (PropertyItem prop in img.PropertyItems)
                 {
                     image.Image.SetPropertyItem(prop);
                 }

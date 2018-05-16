@@ -172,10 +172,12 @@ namespace ProjetAlbum
             // listPictures
             // 
             this.listPictures.AllowDrop = true;
+            this.listPictures.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listPictures.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.listPictures.LargeImageList = this.listPhotos;
             this.listPictures.Location = new System.Drawing.Point(159, 77);
-            this.listPictures.MaximumSize = new System.Drawing.Size(1336, 781);
             this.listPictures.Name = "listPictures";
             this.listPictures.Size = new System.Drawing.Size(1336, 781);
             this.listPictures.SmallImageList = this.listPhotos;
@@ -216,6 +218,7 @@ namespace ProjetAlbum
             // 
             // comboBoxAlbums
             // 
+            this.comboBoxAlbums.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxAlbums.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAlbums.FormattingEnabled = true;
             this.comboBoxAlbums.Items.AddRange(new object[] {
@@ -246,10 +249,10 @@ namespace ProjetAlbum
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(800, 700);
             this.Name = "MainForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Gestion d\'albums photo";
-            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

@@ -396,11 +396,5 @@ namespace ProjetAlbum
                 EffectuerRecherche();
             }
         }
-
-        private void MainForm_Resize(object sender, EventArgs e)
-        {
-            listPictures.Width = this.Width - (listAlbums.Width + 10);
-        }
-        
     }
 }
