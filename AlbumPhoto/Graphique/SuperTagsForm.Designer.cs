@@ -128,6 +128,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SuperTagsForm";
             this.Text = "Gestions des tags";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SuperTagsForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

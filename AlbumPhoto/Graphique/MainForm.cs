@@ -145,10 +145,12 @@ namespace ProjetAlbum
 
         private void LocalisationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (pf == null)
+            if (pf != null)
             {
-                pf = new PreferenceForm(donnees);
-            }            
+                pf.Dispose();
+            }
+
+            pf = new PreferenceForm(donnees);                    
             pf.Show();
         }
 

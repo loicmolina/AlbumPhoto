@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,41 @@ namespace AlbumPhoto.Graphique
         {
             InitializeComponent();
             donnees = dnn;
+
+            try
+            {
+                if (!donnees.path_folder.Equals("") && File.Exists(donnees.path_folder + "//tags.txt"))
+                {
+                    using (StreamReader reader = new StreamReader(donnees.path_folder + "//tags.txt"))
+                    {
+                        string line;
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            if (line.Length > 1)
+                            {
+
+                                int index = line.IndexOf('|');
+                                SuperTag newSt = new SuperTag(line.Substring(0, index).Trim());
+                                Console.WriteLine(newSt);
+
+                                if (line.Length > index + 1)
+                                {
+                                    List<string> listetags = line.Substring(index + 1, (line.Length - 1) - (index + 1)).Split(';').ToList();
+                                    foreach (string s in listetags)
+                                    {
+                                        if (!s.Trim().Equals(""))
+                                            newSt.addTag(s.Trim());
+                                    }
+                                }
+                                donnees.addSuperTag(newSt);
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch { }
+           
 
             foreach (SuperTag st in donnees.listeSuperTags)
             {
@@ -73,6 +109,31 @@ namespace AlbumPhoto.Graphique
 
             donnees.getSuperTag(treeViewTags.SelectedNode.Parent.Text).removeTag(treeViewTags.SelectedNode.Text);
             treeViewTags.SelectedNode.Remove();
+        }
+
+        private void SuperTagsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!donnees.path_folder.Equals("") && donnees.listeSuperTags.Count>0)
+            {
+                if (File.Exists(donnees.path_folder + "//tags.txt"))
+                {
+                    File.Delete(donnees.path_folder + "//tags.txt");
+                }
+                using (StreamWriter writer = new StreamWriter(donnees.path_folder + "//tags.txt"))
+                {
+                    
+                    foreach (SuperTag st in donnees.listeSuperTags)
+                    {
+                        writer.Write(st.nomSuperTag.Trim() + "|");
+                        foreach (string t in st.ListeSousTags)
+                        {
+                            writer.Write(t.Trim() + ";");
+                        }
+                        writer.WriteLine();
+                    }
+                }
+            }
+            
         }
     }
 }
