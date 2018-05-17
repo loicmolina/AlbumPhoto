@@ -70,7 +70,10 @@ namespace AlbumPhoto
             int i = 0;
             while (i < listeSuperTags.Count - 1 && !listeSuperTags[0].nomSuperTag.Equals(nom))
                 i++;
-            return listeSuperTags[i];
+            if (listeSuperTags.Count > 0 && listeSuperTags[i].nomSuperTag.Equals(nom))
+                return listeSuperTags[i];
+            else
+                return null;
         }
 
         public void addSuperTag(SuperTag st)
@@ -154,19 +157,27 @@ namespace AlbumPhoto
         //Méthodes gestions tags
         public void UpdateTags(string filename, Photo p)
         {
-            using (Image img = Image.FromFile(filename))
+            try
             {
-                PropertyItem pi = Outils.Outils.Instance.getPropertyItemByID(img, 40094);  //40094 = id des tags        
-                if (pi != null)
+                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(filename)))
                 {
-                    List<string> listeTags = System.Text.Encoding.Unicode.GetString(pi.Value).Split(';').ToList();
-                    p.ClearTags();
-                    foreach (string s in listeTags)
+                    using (Image img = Image.FromStream(ms))
                     {
-                        p.AddTag(s.Trim());
+                        PropertyItem pi = Outils.Outils.Instance.getPropertyItemByID(img, 40094);  //40094 = id des tags        
+                        if (pi != null)
+                        {
+                            List<string> listeTags = System.Text.Encoding.Unicode.GetString(pi.Value).Split(';').ToList();
+                            p.ClearTags();
+                            foreach (string s in listeTags)
+                            {
+                                p.AddTag(s.Trim());
+                            }
+                        }
                     }
                 }
             }
+            catch { }
+            
         }
 
 
@@ -189,11 +200,6 @@ namespace AlbumPhoto
             }
 
             newtags.AddRange(motscles);
-            foreach(string s in newtags)
-            {
-                Console.WriteLine(s);
-            }
-
 
             if (domaine.Equals("Tous"))
             {

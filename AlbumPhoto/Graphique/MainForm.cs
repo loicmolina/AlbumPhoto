@@ -14,7 +14,6 @@ namespace ProjetAlbum
     public partial class MainForm : Form, Observer
     {
         protected OpenFileDialog openFileDialog;
-        protected FolderBrowserDialog folderBrowserDialog;
         protected SuperTagsForm stf;
         protected PreferenceForm pf;
         protected Donnees donnees;       
@@ -30,9 +29,9 @@ namespace ProjetAlbum
 
             //Instanciatons des File et Browser Dialogs
             this.openFileDialog = new OpenFileDialog();
+            this.openFileDialog.Filter = "Image files | *.jpg; *.jpeg;";
             this.openFileDialog.Multiselect = true;
-            this.openFileDialog.Title = "Selection d'image à importer";
-            folderBrowserDialog = new FolderBrowserDialog();            
+            this.openFileDialog.Title = "Selection d'image à importer";      
         }
 
         public MainForm(Donnees dnn)
@@ -49,9 +48,9 @@ namespace ProjetAlbum
 
             //Instanciatons des File et Browser Dialogs
             openFileDialog = new OpenFileDialog();
+            this.openFileDialog.Filter = "Image files | *.jpg; *.jpeg;";
             this.openFileDialog.Multiselect = true;
             this.openFileDialog.Title = "Selection d'image à importer";
-            folderBrowserDialog = new FolderBrowserDialog();
         }
 
         //Gestion des boutons
@@ -98,7 +97,7 @@ namespace ProjetAlbum
 
             if (listAlbums.SelectedIndex == -1)
             {
-                buttonDelImage.Enabled = false;
+                buttonDelPhoto.Enabled = false;
                 buttonImportPhoto.Enabled = false;
                 buttonDelAlbum.Enabled = false;
             }
@@ -193,9 +192,9 @@ namespace ProjetAlbum
         private void ListPictures_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (donnees.current_album != null)
-                buttonDelImage.Enabled = true;
+                buttonDelPhoto.Enabled = true;
             else
-                buttonDelImage.Enabled = false;
+                buttonDelPhoto.Enabled = false;
         }
 
 
@@ -203,19 +202,26 @@ namespace ProjetAlbum
         //Methodes d'ajout des photos
 
 
-        public void AjoutDansListePhotosForm(string img_fullname)
+        public void AjoutDansListePhotosForm(string img_fullname, bool newphoto)
         {
-            
-            using (Image image = Image.FromFile(img_fullname))
+            try
             {
+                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(img_fullname)))
+                {
+                    using (Image image = Image.FromStream(ms))
+                    {
 
-                //Console.WriteLine("AJOUT DE L'IMAGE DANS LA VUE : " + img_fullname);
-                ListViewItem newItem = new ListViewItem();
-                newItem.ImageIndex = listPhotos.Images.Count;
-                listPictures.Items.Add(newItem);
-                listPhotos.Images.Add(Outils.Instance.getName(img_fullname), Outils.Instance.squareImage(image));
+                        //Console.WriteLine("AJOUT DE L'IMAGE DANS LA VUE : " + img_fullname);
+                        ListViewItem newItem = new ListViewItem();
+                        newItem.ImageIndex = listPhotos.Images.Count;
+                        listPictures.Items.Add(newItem);
+                        listPhotos.Images.Add(Outils.Instance.getName(img_fullname), Outils.Instance.squareImage(image));
 
-            }  
+                    }
+                }
+            }
+            catch { if (newphoto) { MessageBox.Show("Fichier inutilisable (Format incorrect ou données corrompus"); }  }
+            
         }
 
         public void AjoutPhoto(string filename)
@@ -227,7 +233,7 @@ namespace ProjetAlbum
             {
                 System.IO.File.Copy(filename, donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename), true);
                 AjoutDansListePhotosModele(Outils.Instance.getName(filename));
-                AjoutDansListePhotosForm(donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename));
+                AjoutDansListePhotosForm(donnees.path_folder + "\\" + donnees.current_album + "\\" + Outils.Instance.getName(filename),true);
             }
         }
         
@@ -264,20 +270,13 @@ namespace ProjetAlbum
              
             }
             listPictures.SelectedIndices.Clear();
-            buttonDelImage.Enabled = false;
+            buttonDelPhoto.Enabled = false;
         }
 
 
 
 
         //Méthodes de mises à jour
-
-        public void RefreshImagesForm()
-        {
-            RefreshImageList();
-            RefreshListView();
-            //Console.WriteLine("REFRESHED !");
-        }
 
         public void RefreshImageList()
         {
@@ -291,7 +290,7 @@ namespace ProjetAlbum
                 {
                     if (Outils.Instance.IsCorrectType(p.nom))
                     {
-                        AjoutDansListePhotosForm(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + p.nom);
+                        AjoutDansListePhotosForm(donnees.path_folder + "\\" + listAlbums.SelectedItem.ToString() + "\\" + p.nom,false);
                         progressBar.Value += 1;
                     }
                 }
@@ -344,6 +343,7 @@ namespace ProjetAlbum
             comboBoxAlbums.Items.Clear();
             comboBoxAlbums.Items.Add("Tous");
             comboBoxAlbums.SelectedIndex = 0;
+            comboBoxZone.SelectedIndex = 0;
 
             foreach (string folderpath in folders)
             {
@@ -376,6 +376,10 @@ namespace ProjetAlbum
             e.Effect = DragDropEffects.Copy;
         }
 
+
+        //Detail des images
+
+
         private void ListPictures_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (listPictures.SelectedIndices.Count != 1 && listPhotos.Images.Count<=0)
@@ -396,10 +400,18 @@ namespace ProjetAlbum
             
         }
 
+
+        //Gestion des recherches et tags 
+
+
         public void EffectuerRecherche()
         {
             if (textBoxRecherche.Text == "" || comboBoxAlbums.Text=="")
                 return;
+
+            buttonImportPhoto.Enabled = false;
+            buttonDelPhoto.Enabled = false;
+            buttonDelAlbum.Enabled = false;
 
             List<string> ListeMotsCles = textBoxRecherche.Text.Split(',').ToList();
             Outils.Instance.TrimList(ListeMotsCles);
@@ -415,9 +427,12 @@ namespace ProjetAlbum
             //Ajoute les résultats de recherche
             foreach (string[] s in donnees.listeResultats)
             {
-                AjoutDansListePhotosForm(donnees.path_folder + "//" + s[0] + "//" + s[1]);
+                AjoutDansListePhotosForm(donnees.path_folder + "//" + s[0] + "//" + s[1],false);
             }
         }
+
+
+        //raccourcis clavier
 
         private void TextBoxRecherche_KeyDown(object sender, KeyEventArgs e)
         {
@@ -427,10 +442,6 @@ namespace ProjetAlbum
             }
         }
 
-        private void MainForm_Resize(object sender, EventArgs e)
-        {
-            listPictures.Width = this.Width - (listAlbums.Width + 10);
-        }
 
         private void listPictures_KeyDown(object sender, KeyEventArgs e)
         {
@@ -438,6 +449,15 @@ namespace ProjetAlbum
             {
                 SupprimerPhoto();
             }
+        }
+
+
+
+        //autoresize
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            listPictures.Width = this.Width - (listAlbums.Width + 10);
         }
 
     }
