@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -172,6 +173,15 @@ namespace AlbumPhoto
                             {
                                 p.AddTag(s.Trim());
                             }
+                        }
+                        else
+                        {
+                            var newProp = (PropertyItem)Activator.CreateInstance(typeof(PropertyItem), BindingFlags.Instance | BindingFlags.NonPublic, null, new object[0], CultureInfo.InvariantCulture);
+                            newProp.Id = 0x9c9e;
+                            newProp.Type = 1;
+                            newProp.Value = Encoding.Unicode.GetBytes("/0");
+                            newProp.Len = newProp.Value.Length;
+                            img.SetPropertyItem(newProp);
                         }
                     }
                 }

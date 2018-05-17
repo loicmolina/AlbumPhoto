@@ -68,7 +68,8 @@ namespace AlbumPhoto.Graphique
             }
             try
             {
-                image.Image.RemovePropertyItem(40094); //Suppression des anciens tags
+                if (image.Image.PropertyItems.Length>0 && image.Image.GetPropertyItem(40094) == null)
+                    image.Image.RemovePropertyItem(40094); //Suppression des anciens tags
                 pi.Value = Encoding.Unicode.GetBytes(value + "\0");
 
                 image.Image.SetPropertyItem(pi);
