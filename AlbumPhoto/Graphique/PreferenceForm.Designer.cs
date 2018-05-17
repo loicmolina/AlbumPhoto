@@ -37,9 +37,9 @@
             // 
             // button_browse_folder
             // 
-            this.button_browse_folder.Location = new System.Drawing.Point(356, 46);
+            this.button_browse_folder.Location = new System.Drawing.Point(327, 45);
             this.button_browse_folder.Name = "button_browse_folder";
-            this.button_browse_folder.Size = new System.Drawing.Size(25, 20);
+            this.button_browse_folder.Size = new System.Drawing.Size(24, 22);
             this.button_browse_folder.TabIndex = 0;
             this.button_browse_folder.Text = "...";
             this.button_browse_folder.UseVisualStyleBackColor = true;
@@ -48,7 +48,7 @@
             // textBox_folder_path
             // 
             this.textBox_folder_path.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.textBox_folder_path.Location = new System.Drawing.Point(27, 46);
+            this.textBox_folder_path.Location = new System.Drawing.Point(17, 46);
             this.textBox_folder_path.Name = "textBox_folder_path";
             this.textBox_folder_path.ReadOnly = true;
             this.textBox_folder_path.Size = new System.Drawing.Size(306, 20);
@@ -58,7 +58,7 @@
             // 
             this.button_accept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button_accept.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_accept.Location = new System.Drawing.Point(169, 103);
+            this.button_accept.Location = new System.Drawing.Point(157, 110);
             this.button_accept.Name = "button_accept";
             this.button_accept.Size = new System.Drawing.Size(75, 23);
             this.button_accept.TabIndex = 2;
@@ -70,7 +70,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(25, 28);
+            this.label1.Location = new System.Drawing.Point(15, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(167, 16);
             this.label1.TabIndex = 3;
@@ -81,11 +81,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.ClientSize = new System.Drawing.Size(414, 156);
+            this.ClientSize = new System.Drawing.Size(373, 156);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_accept);
             this.Controls.Add(this.textBox_folder_path);
             this.Controls.Add(this.button_browse_folder);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PreferenceForm";
             this.Text = "Localisation";

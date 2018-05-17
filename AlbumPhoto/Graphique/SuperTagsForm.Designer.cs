@@ -125,6 +125,7 @@
             this.Controls.Add(this.buttonAddSuperTag);
             this.Controls.Add(this.textBoxSuperTag);
             this.Controls.Add(this.treeViewTags);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SuperTagsForm";
             this.Text = "Gestions des tags";

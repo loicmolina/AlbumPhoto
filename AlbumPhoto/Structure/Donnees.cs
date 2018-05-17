@@ -177,7 +177,6 @@ namespace AlbumPhoto
                                         p.AddTag(listeTags[i].Remove(listeTags[i].Length - 1));
                                     else
                                         p.AddTag(listeTags[i]);
-                                    Console.WriteLine("ajout du tag  :" + p.tags[i]);
                                 }
                                 
                             }
