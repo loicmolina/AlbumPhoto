@@ -45,7 +45,6 @@ namespace ProjetAlbum
             this.buttonImportPhoto = new System.Windows.Forms.Button();
             this.buttonDelAlbum = new System.Windows.Forms.Button();
             this.buttonDelPhoto = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.listPictures = new System.Windows.Forms.ListView();
             this.textBoxRecherche = new System.Windows.Forms.TextBox();
             this.buttonRecherche = new System.Windows.Forms.Button();
@@ -180,16 +179,6 @@ namespace ProjetAlbum
             this.buttonDelPhoto.UseVisualStyleBackColor = true;
             this.buttonDelPhoto.Click += new System.EventHandler(this.ButtonDelImage_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(3, 557);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "TEST";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
             // listPictures
             // 
             this.listPictures.Activation = System.Windows.Forms.ItemActivation.OneClick;
@@ -279,7 +268,6 @@ namespace ProjetAlbum
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.buttonRecherche);
             this.Controls.Add(this.textBoxRecherche);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonDelPhoto);
             this.Controls.Add(this.buttonDelAlbum);
             this.Controls.Add(this.buttonImportPhoto);
@@ -314,7 +302,6 @@ namespace ProjetAlbum
         private System.Windows.Forms.Button buttonImportPhoto;
         private System.Windows.Forms.Button buttonDelAlbum;
         private System.Windows.Forms.Button buttonDelPhoto;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listPictures;
         private TextBox textBoxRecherche;
         private Button buttonRecherche;
