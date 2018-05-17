@@ -96,7 +96,7 @@ namespace AlbumPhoto.Graphique
             // 
             // image
             // 
-            this.image.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.image.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.image.Location = new System.Drawing.Point(12, 16);
             this.image.Name = "image";
             this.image.Size = new System.Drawing.Size(362, 373);
@@ -131,7 +131,7 @@ namespace AlbumPhoto.Graphique
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.ClientSize = new System.Drawing.Size(679, 407);
             this.Controls.Add(this.labelAlbumName);
             this.Controls.Add(this.labelAlbum);

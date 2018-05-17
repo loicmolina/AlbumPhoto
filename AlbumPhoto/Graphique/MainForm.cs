@@ -252,7 +252,7 @@ namespace ProjetAlbum
 
         public void SupprimerPhoto()
         {
-            if (listPictures.SelectedItems.Equals(null))
+            if (listPictures.SelectedItems.Equals(null) || listAlbums.SelectedIndex == -1)
             { return; }
 
             ListView.SelectedIndexCollection indexes = listPictures.SelectedIndices;

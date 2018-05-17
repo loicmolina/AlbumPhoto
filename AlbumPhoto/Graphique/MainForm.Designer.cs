@@ -198,7 +198,6 @@ namespace ProjetAlbum
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listPictures.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.listPictures.HoverSelection = true;
             this.listPictures.LargeImageList = this.listPhotos;
             this.listPictures.Location = new System.Drawing.Point(159, 77);
             this.listPictures.Name = "listPictures";

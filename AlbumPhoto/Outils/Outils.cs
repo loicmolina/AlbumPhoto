@@ -55,6 +55,7 @@ namespace AlbumPhoto.Outils
             Bitmap squareImage = new Bitmap(squareSize.Width, squareSize.Height);
             using (Graphics graphics = Graphics.FromImage(squareImage))
             {
+                graphics.FillRectangle(Brushes.White, 0, 0, squareSize.Width, squareSize.Height);
                 graphics.DrawImage(originalImage, (squareSize.Width / 2) - (originalImage.Width / 2), (squareSize.Height / 2) - (originalImage.Height / 2), originalImage.Width, originalImage.Height);
             }
             return squareImage;
