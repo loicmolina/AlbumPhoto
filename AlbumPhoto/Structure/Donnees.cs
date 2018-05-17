@@ -169,9 +169,17 @@ namespace AlbumPhoto
                         {
                             List<string> listeTags = System.Text.Encoding.Unicode.GetString(pi.Value).Split(';').ToList();
                             p.ClearTags();
-                            foreach (string s in listeTags)
+                            for (int i = 0; i < listeTags.Count; i++)
                             {
-                                p.AddTag(s.Trim());
+                                if (listeTags[i].Trim() != "" && listeTags[i].Trim() != "\n")
+                                {
+                                    if (i == listeTags.Count - 1)
+                                        p.AddTag(listeTags[i].Remove(listeTags[i].Length - 1));
+                                    else
+                                        p.AddTag(listeTags[i]);
+                                    Console.WriteLine("ajout du tag  :" + p.tags[i]);
+                                }
+                                
                             }
                         }
                         else

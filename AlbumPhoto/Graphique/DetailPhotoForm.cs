@@ -66,21 +66,17 @@ namespace AlbumPhoto.Graphique
             {
                 value += s + ';';
             }
-            try
+            if (image.Image.PropertyItems.Length>0 && image.Image.GetPropertyItem(40094) == null)
+                image.Image.RemovePropertyItem(40094); //Suppression des anciens tags
+            pi.Value = Encoding.Unicode.GetBytes(value + "\0");
+
+            image.Image.SetPropertyItem(pi);
+            image.Image.Save(donnees.path_folder + "//" + labelAlbumName.Text + "//" + labelPictureName.Text, ImageFormat.Jpeg);
+
+            foreach (string s in tagsRegistered)
             {
-                if (image.Image.PropertyItems.Length>0 && image.Image.GetPropertyItem(40094) == null)
-                    image.Image.RemovePropertyItem(40094); //Suppression des anciens tags
-                pi.Value = Encoding.Unicode.GetBytes(value + "\0");
-
-                image.Image.SetPropertyItem(pi);
-                image.Image.Save(donnees.path_folder + "//" + labelAlbumName.Text + "//" + labelPictureName.Text, ImageFormat.Jpeg);
-
-                foreach (string s in tagsRegistered)
-                {
-                    this.currentPhoto.AddTag(s.Trim());
-                }
+                this.currentPhoto.AddTag(s.Trim());
             }
-            catch { }
             
 
             this.Close();

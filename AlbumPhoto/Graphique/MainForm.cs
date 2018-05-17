@@ -406,7 +406,7 @@ namespace ProjetAlbum
 
         public void EffectuerRecherche()
         {
-            if (textBoxRecherche.Text == "" || comboBoxAlbums.Text=="")
+            if (textBoxRecherche.Text.Trim() == "" || comboBoxAlbums.Text=="")
                 return;
 
             buttonImportPhoto.Enabled = false;
